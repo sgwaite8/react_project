@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Webpack Express with Auth</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+
+    <ul>
+    <% if (user) { %>
+      <li>Welcome back, <%= user.email %></li>
+      <li>
+        <a href="/sessions/logout">Logout</a>
+      </li>
+    <% } else { %>
+      <li>
+        <a href="/users/new">Sign Up</a></li>
+      <li>
+        <a href="/sessions/new">Login</a>
+      </li>
+    <% } %>
+    </ul>
