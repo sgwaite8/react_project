@@ -9,7 +9,7 @@ class TaskMap extends React.Component {
   render() {
     return (
       <div>
-        Map
+
       </div>
     );
   }

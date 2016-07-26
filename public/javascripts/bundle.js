@@ -21171,7 +21171,7 @@
 	        null,
 	        _react2.default.createElement(_taskForm2.default, null),
 	        _react2.default.createElement(_taskList2.default, null),
-	        _react2.default.createElement(_taskMap2.default, null)
+	        _react2.default.createElement(_taskMap2.default, { mlat: '55.0000', mlong: '-113.0000' })
 	      );
 	    }
 	  }]);
@@ -21812,11 +21812,7 @@
 	  _createClass(TaskMap, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Map'
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 	
