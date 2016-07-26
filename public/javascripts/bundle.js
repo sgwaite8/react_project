@@ -21763,11 +21763,7 @@
 	  _createClass(Task, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(Task, null)
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 	
