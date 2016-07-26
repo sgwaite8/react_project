@@ -4,14 +4,15 @@ import GoogleMap from 'google-map-react';
 class TaskMap extends React.Component {
   render() {
     return (
-      <div id="map">
+      <div className="col-md-offset-6" id="map">
         <GoogleMap
-          defaultCenter={{lat: 36.964, lng: -122.015}}
+          defaultCenter={{lat: 30.2672, lng: -97.7431}}
           defaultZoom={8}>
         </GoogleMap>
       </div>
     );
   }
 }
+
 
 export default TaskMap;

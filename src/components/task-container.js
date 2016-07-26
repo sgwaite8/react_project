@@ -35,7 +35,7 @@ class TaskContainer extends React.Component {
       <div>
         <TaskForm/>
         <TaskList/>
-        <TaskMap mlat="55.0000" mlong="-113.0000"/>
+        <TaskMap />
       </div>
     );
   }
