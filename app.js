@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-mongoose.connect(process.env.DB_CONNECT);
+// mongoose.connect(process.env.DB_CONNECT);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -33,12 +33,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
-app.use(session({
-  secret: process.env.APP_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { path: '/', httpOnly: true, secure: false, maxAge: null }
-}));
+// app.use(session({
+//   secret: process.env.APP_SECRET,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { path: '/', httpOnly: true, secure: false, maxAge: null }
+// }));
 
 app.use(passport.initialize());
 app.use(passport.session());
