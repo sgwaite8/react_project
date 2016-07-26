@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Task extends React.Component {
+class TaskMap extends React.Component {
 
   constructor(props) {
     super(props);
@@ -9,10 +9,10 @@ class Task extends React.Component {
   render() {
     return (
       <div>
-        <Task />
+        Map
       </div>
     );
   }
 }
 
-export default Task;
+export default TaskMap;
