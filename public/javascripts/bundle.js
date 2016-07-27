@@ -21171,7 +21171,7 @@
 	        null,
 	        _react2.default.createElement(_taskForm2.default, null),
 	        _react2.default.createElement(_taskList2.default, null),
-	        _react2.default.createElement(_taskMap2.default, { mlat: '55.0000', mlong: '-113.0000' })
+	        _react2.default.createElement(_taskMap2.default, null)
 	      );
 	    }
 	  }]);
@@ -21661,11 +21661,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Form'
-	      );
+	      return _react2.default.createElement('div', null);
 	    }
 	  }]);
 	
@@ -21788,6 +21784,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _googleMapReact = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"google-map-react\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21799,16 +21799,22 @@
 	var TaskMap = function (_React$Component) {
 	  _inherits(TaskMap, _React$Component);
 	
-	  function TaskMap(props) {
+	  function TaskMap() {
 	    _classCallCheck(this, TaskMap);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskMap).call(this, props));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskMap).apply(this, arguments));
 	  }
 	
 	  _createClass(TaskMap, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', null);
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'col-md-offset-6', id: 'map' },
+	        _react2.default.createElement(_googleMapReact2.default, {
+	          defaultCenter: { lat: 30.2672, lng: -97.7431 },
+	          defaultZoom: 8 })
+	      );
 	    }
 	  }]);
 	
