@@ -21112,7 +21112,7 @@
 	
 	__webpack_require__(173);
 	
-	var _taskForm = __webpack_require__(174);
+	var _taskForm = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./task-form\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _taskForm2 = _interopRequireDefault(_taskForm);
 	
@@ -21140,28 +21140,37 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TaskContainer).call(this, props));
 	
-	    _this.state = { task: [] };
+	    _this.state = { task: [], location: [] };
 	    return _this;
 	  }
+	  // componentDidMount(){
+	  //   $.ajax({
+	  //     method: 'GET',
+	  //     url: '/',
+	  //     dataType: 'json'
+	  //   })
+	  //   .done(function(data){
+	  //     this.setState({ task: data})
+	  //   }.bind(this))
+	  // }
+	
 	
 	  _createClass(TaskContainer, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      $.ajax({
-	        method: 'GET',
-	        url: '/',
-	        dataType: 'json'
-	      }).done(function (data) {
-	        this.setState({ task: data });
-	      }.bind(this));
-	    }
-	  }, {
 	    key: '_addTask',
 	    value: function _addTask(newTask) {
-	      var currentTasks = this.state.tasks;
+	      var currentTasks = this.state.task;
+	      currentTasks.push(newTask);
+	      this.setState({ task: currentTasks });
+	      console.log({ task: currentTasks });
 	      debugger;
-	      currentTasks.task.push(newTask);
-	      this.setState({ tasks: currentTasks });
+	    }
+	  }, {
+	    key: '_addLocation',
+	    value: function _addLocation(newLocation) {
+	      var currentLocations = this.state.location;
+	      currentLocations.push(newLocation);
+	      debugger;
+	      this.setState({ location: currentLocations });
 	    }
 	  }, {
 	    key: 'render',
@@ -21169,8 +21178,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
-	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks }),
+	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this), addLocation: this._addLocation.bind(this) }),
+	        _react2.default.createElement(_taskList2.default, { task: this.state.task, location: this.state.location }),
 	        _react2.default.createElement(_taskMap2.default, null)
 	      );
 	    }
@@ -21621,128 +21630,7 @@
 
 
 /***/ },
-/* 174 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var TaskForm = function (_React$Component) {
-	  _inherits(TaskForm, _React$Component);
-	
-	  function TaskForm(props) {
-	    _classCallCheck(this, TaskForm);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskForm).call(this, props));
-	  }
-	
-	  _createClass(TaskForm, [{
-	    key: '_initialize',
-	    value: function _initialize() {
-	      var input = document.getElementById('searchTextField');
-	      var autocomplete = new google.maps.places.Autocomplete(input);
-	      debugger;
-	      autocomplete.bindTo('bounds', map);
-	    }
-	    // google.maps.event.addDomListener(window, 'load', initialize);
-	
-	    // _handleSubmit(evt) {
-	    //   evt.preventDefault();
-	
-	    //   let newTask = this.refs.newTask.value;
-	    //   let newLocation = this.refs.newLocation.value;
-	    // $.ajax({
-	    //   url: '/',
-	    //   method: 'POST',
-	    //   data: { text: newTask, location: newLocation },
-	    //   dataType: 'json'
-	    // })
-	    // .done(function(data){
-	    //   console.log(data);
-	    //   this.props.addTask(data);
-	    //   this.refs.newTask.value = '';
-	    //   this.refs.newLocation.value = '';
-	    // }.bind(this))
-	
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel panel-default' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-heading' },
-	            _react2.default.createElement(
-	              'h3',
-	              { className: 'panel-title' },
-	              'Input New Task'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-body' },
-	            _react2.default.createElement(
-	              'form',
-	              null,
-	              _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                  'label',
-	                  null,
-	                  'Task:'
-	                ),
-	                _react2.default.createElement('input', { ref: 'newTask', type: 'text', placeholder: 'New Task' })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                  'label',
-	                  null,
-	                  'Task Location:'
-	                ),
-	                _react2.default.createElement('input', { onKeyUp: this._initialize, id: 'searchTextField', ref: 'newLocation', type: 'text', placeholder: 'Task Location' })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement('input', { type: 'submit', value: 'Enter New Task' })
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return TaskForm;
-	}(_react2.default.Component);
-	
-	exports.default = TaskForm;
-
-/***/ },
+/* 174 */,
 /* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21800,15 +21688,12 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'panel-body' },
-	            _react2.default.createElement(
-	              'form',
-	              { action: '/', method: 'post' },
-	              _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_task2.default, null)
-	              )
-	            )
+	            this.props.task.map(function (taskString, index) {
+	              return _react2.default.createElement(_task2.default, { key: index, text: taskString });
+	            }),
+	            this.props.location.map(function (locationString, index) {
+	              return _react2.default.createElement(_task2.default, { key: index, text: locationString });
+	            })
 	          )
 	        )
 	      );
@@ -21863,14 +21748,14 @@
 	          'h3',
 	          null,
 	          ' ',
-	          this.props.newTask,
+	          this.props.text,
 	          ' '
 	        ),
 	        _react2.default.createElement(
 	          'p',
 	          null,
 	          ' ',
-	          this.props.newLocation,
+	          this.props.location,
 	          ' '
 	        )
 	      );
@@ -21932,9 +21817,9 @@
 	        _react2.default.createElement(
 	          _googleMapReact2.default,
 	          {
-	            defaultCenter: { lat: 37.0902, lng: -95.7129 },
-	            defaultZoom: 2 },
-	          _react2.default.createElement(_marker2.default, { className: 'marker', lat: 30.2672, lng: -97.7431, text: '#' })
+	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
+	            defaultZoom: 10 },
+	          _react2.default.createElement(_marker2.default, { className: 'marker', lat: 30.2672, lng: -97.7431, text: 'W' })
 	        )
 	      );
 	    }

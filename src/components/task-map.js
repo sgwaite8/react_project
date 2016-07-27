@@ -8,9 +8,9 @@ class TaskMap extends React.Component {
     return (
       <div className="col-md-offset-6" id="map">
         <GoogleMap
-          defaultCenter={{lat: 37.0902, lng: -95.7129}}
-          defaultZoom={2}>
-          <Marker className="marker" lat={30.2672} lng={-97.7431} text={'#'}/>
+          defaultCenter={{lat: 30.2672, lng: -97.7431}}
+          defaultZoom={10}>
+          <Marker className="marker" lat={30.2672} lng={-97.7431} text={'W'}/>
         </GoogleMap>
       </div>
     );
