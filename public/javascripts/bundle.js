@@ -21633,7 +21633,7 @@
 /* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21663,13 +21663,15 @@
 	  }
 	
 	  _createClass(TaskForm, [{
-	    key: "_handleSubmit",
+	    key: '_handleSubmit',
 	    value: function _handleSubmit(event) {
 	      event.preventDefault();
 	      var newTask = this.refs.newTask.value;
 	      var newLocation = this.refs.newLocation.value;
 	      this.props.addTask(newTask);
 	      this.props.addLocation(newLocation);
+	      this.refs.newTask.value = '';
+	      this.refs.newLocation.value = '';
 	    }
 	    // _handleSubmit(evt) {
 	    //   evt.preventDefault();
@@ -21690,53 +21692,53 @@
 	    // }.bind(this))
 	
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
+	        'div',
 	        null,
 	        _react2.default.createElement(
-	          "div",
-	          { className: "panel panel-default" },
+	          'div',
+	          { className: 'panel panel-default' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "panel-heading" },
+	            'div',
+	            { className: 'panel-heading' },
 	            _react2.default.createElement(
-	              "h3",
-	              { className: "panel-title" },
-	              "Input New Task"
+	              'h3',
+	              { className: 'panel-title' },
+	              'Input New Task'
 	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "panel-body" },
+	            'div',
+	            { className: 'panel-body' },
 	            _react2.default.createElement(
-	              "form",
+	              'form',
 	              { onSubmit: this._handleSubmit.bind(this) },
 	              _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
 	                _react2.default.createElement(
-	                  "label",
+	                  'label',
 	                  null,
-	                  "Task:"
+	                  'Task:'
 	                ),
-	                _react2.default.createElement("input", { ref: "newTask", type: "text", placeholder: "New Task" })
+	                _react2.default.createElement('input', { ref: 'newTask', type: 'text', placeholder: 'New Task' })
 	              ),
 	              _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
 	                _react2.default.createElement(
-	                  "label",
+	                  'label',
 	                  null,
-	                  "Task Location:"
+	                  'Task Location:'
 	                ),
-	                _react2.default.createElement("input", { ref: "newLocation", type: "text", placeholder: "Task Location" })
+	                _react2.default.createElement('input', { ref: 'newLocation', type: 'text', placeholder: 'Task Location' })
 	              ),
 	              _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
-	                _react2.default.createElement("input", { type: "submit", value: "Enter New Task" })
+	                _react2.default.createElement('input', { type: 'submit', value: 'Enter New Task' })
 	              )
 	            )
 	          )

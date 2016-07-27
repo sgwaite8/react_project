@@ -11,6 +11,8 @@ class TaskForm extends React.Component {
     let newLocation = this.refs.newLocation.value;
     this.props.addTask(newTask);
     this.props.addLocation(newLocation);
+    this.refs.newTask.value = '';
+    this.refs.newLocation.value = '';
   }
   // _handleSubmit(evt) {
   //   evt.preventDefault();
