@@ -21937,8 +21937,8 @@
 	        _react2.default.createElement(
 	          _googleMapReact2.default,
 	          {
-	            defaultCenter: { lat: 37.0902, lng: -95.7129 },
-	            defaultZoom: 2 },
+	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
+	            defaultZoom: 10 },
 	          _react2.default.createElement(_marker2.default, { className: 'marker', lat: 30.2672, lng: -97.7431, text: 'W' })
 	        )
 	      );
