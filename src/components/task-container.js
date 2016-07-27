@@ -8,34 +8,30 @@ class TaskContainer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { task: [] };
   }
-
-  // _fetchMovie(searchTerm) {
-  //
-  //   fetch(`//www.omdbapi.com/?t=${searchTerm}&y=&plot=short&r=json`)
-  //
-  //     .then((response) => {
-  //       return response.json()
-  //     })
-  //     .then((results) => {
-  //       console.log(results)
-  //       this.setState({
-  //         movie: results
-  //       })
-  //     })
-  //     .catch((ex) => {
-  //       console.log('parsing failed', ex)
-  //     })
-  // }
-
-
+  componentDidMount(){
+    $.ajax({
+      method: 'GET',
+      url: '/',
+      dataType: 'json'
+    })
+    .done(function(data){
+      this.setState({ task: data})
+    }.bind(this))
+  }
+  _addTask(newTask){
+    let currentTasks = this.state.tasks;
+    debugger
+    currentTasks.task.push(newTask);
+    this.setState({tasks: currentTasks});
+  }
   render() {
     return (
       <div>
-        <TaskForm/>
-        <TaskList/>
-        <TaskMap />
+        <TaskForm addTask={this._addTask.bind(this)} />
+        <TaskList tasks={this.state.tasks} />
+        <TaskMap mlat="55.0000" mlong="-113.0000"/>
       </div>
     );
   }
