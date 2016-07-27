@@ -33,6 +33,7 @@ class TaskContainer extends React.Component {
     debugger
     this.setState({location: currentLocations});
   }
+
   render() {
     return (
       <div>
