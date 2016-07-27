@@ -21124,6 +21124,14 @@
 	
 	var _taskMap2 = _interopRequireDefault(_taskMap);
 	
+	var _firebase = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"firebase\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _firebase2 = _interopRequireDefault(_firebase);
+	
+	var _underscore = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"underscore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _underscore2 = _interopRequireDefault(_underscore);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21140,37 +21148,41 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TaskContainer).call(this, props));
 	
-	    _this.state = { task: [], location: [] };
+	    _this.state = { tasks: [] };
 	    return _this;
 	  }
-	  // componentDidMount(){
-	  //   $.ajax({
-	  //     method: 'GET',
-	  //     url: '/',
-	  //     dataType: 'json'
-	  //   })
-	  //   .done(function(data){
-	  //     this.setState({ task: data})
-	  //   }.bind(this))
-	  // }
-	
 	
 	  _createClass(TaskContainer, [{
-	    key: '_addTask',
-	    value: function _addTask(newTask) {
-	      var currentTasks = this.state.task;
-	      currentTasks.push(newTask);
-	      this.setState({ task: currentTasks });
-	      console.log({ task: currentTasks });
-	      debugger;
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+	
+	      var config = {
+	        apiKey: "AIzaSyB0FGjzZF8JsBu75GGFgQwabrBBrSzfz0s",
+	        authDomain: "wdi6-group-project-3.firebaseapp.com",
+	        databaseURL: "https://wdi6-group-project-3.firebaseio.com",
+	        storageBucket: ""
+	      };
+	      var firebaseApp = firebase.initializeApp(config);
+	      var firebaseDb = firebaseApp.database();
+	
+	      this.firebaseRef = firebaseDb.ref("tasks");
+	      this.firebaseRef.on("value", function (snapshot) {
+	        console.log(snapshot.val());
+	        _this2.setState({ tasks: _underscore2.default.values(snapshot.val()) });
+	      }, function (errorObject) {
+	        console.log("The read failed: " + errorObject.code);
+	      });
 	    }
 	  }, {
-	    key: '_addLocation',
-	    value: function _addLocation(newLocation) {
-	      var currentLocations = this.state.location;
-	      currentLocations.push(newLocation);
-	      debugger;
-	      this.setState({ location: currentLocations });
+	    key: '_addTask',
+	    value: function _addTask(message, location) {
+	      var newTask = {
+	        message: message,
+	        location: location
+	      };
+	      this.setState({ tasks: this.state.tasks.concat(newTask) });
+	      this.firebaseRef.push(newTask);
 	    }
 	  }, {
 	    key: 'render',
@@ -21178,8 +21190,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this), addLocation: this._addLocation.bind(this) }),
-	        _react2.default.createElement(_taskList2.default, { task: this.state.task, location: this.state.location }),
+	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
+	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks }),
 	        _react2.default.createElement(_taskMap2.default, null)
 	      );
 	    }
@@ -21633,7 +21645,7 @@
 /* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21663,14 +21675,39 @@
 	  }
 	
 	  _createClass(TaskForm, [{
-	    key: "_handleSubmit",
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var input = document.getElementById('searchTextField');
+	      var options = { componentRestrictions: { country: 'us' } };
+	      var autocomplete = new google.maps.places.Autocomplete(input, options);
+	      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+	        var thisplace = autocomplete.getPlace();
+	        console.log(thisplace);
+	        debugger;
+	      });
+	    }
+	
+	    // _handleAutocomplete() {
+	    //   var input = document.getElementById('searchTextField');
+	    //   var autocomplete = new google.maps.places.Autocomplete(input);
+	    //   autocomplete.bindTo('bounds', map);
+	    //   console.log(autocomplete);
+	    // }
+	    // google.maps.event.addDomListener(window, 'load', initialize);
+	
+	
+	  }, {
+	    key: '_handleSubmit',
 	    value: function _handleSubmit(event) {
 	      event.preventDefault();
 	      var newTask = this.refs.newTask.value;
 	      var newLocation = this.refs.newLocation.value;
-	      this.props.addTask(newTask);
-	      this.props.addLocation(newLocation);
+	      this.props.addTask(newTask, newLocation);
+	      // this.props.addLocation(newLocation);
+	      this.refs.newTask.value = '';
+	      // this.refs.newLocation.value = '';
 	    }
+	
 	    // _handleSubmit(evt) {
 	    //   evt.preventDefault();
 	
@@ -21690,53 +21727,53 @@
 	    // }.bind(this))
 	
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
+	        'div',
 	        null,
 	        _react2.default.createElement(
-	          "div",
-	          { className: "panel panel-default" },
+	          'div',
+	          { className: 'panel panel-default' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "panel-heading" },
+	            'div',
+	            { className: 'panel-heading' },
 	            _react2.default.createElement(
-	              "h3",
-	              { className: "panel-title" },
-	              "Input New Task"
+	              'h3',
+	              { className: 'panel-title' },
+	              'Input New Task'
 	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "panel-body" },
+	            'div',
+	            { className: 'panel-body' },
 	            _react2.default.createElement(
-	              "form",
+	              'form',
 	              { onSubmit: this._handleSubmit.bind(this) },
 	              _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
 	                _react2.default.createElement(
-	                  "label",
+	                  'label',
 	                  null,
-	                  "Task:"
+	                  'Task:'
 	                ),
-	                _react2.default.createElement("input", { ref: "newTask", type: "text", placeholder: "New Task" })
+	                _react2.default.createElement('input', { ref: 'newTask', type: 'text', placeholder: 'New Task' })
 	              ),
 	              _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
 	                _react2.default.createElement(
-	                  "label",
+	                  'label',
 	                  null,
-	                  "Task Location:"
+	                  'Task Location:'
 	                ),
-	                _react2.default.createElement("input", { ref: "newLocation", type: "text", placeholder: "Task Location" })
+	                _react2.default.createElement('input', { id: 'searchTextField', ref: 'newLocation', type: 'text', placeholder: 'Task Location' })
 	              ),
 	              _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
-	                _react2.default.createElement("input", { type: "submit", value: "Enter New Task" })
+	                _react2.default.createElement('input', { type: 'submit', value: 'Enter New Task' })
 	              )
 	            )
 	          )
@@ -21759,6 +21796,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -21808,11 +21847,8 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'panel-body' },
-	            this.props.task.map(function (taskString, index) {
-	              return _react2.default.createElement(_task2.default, { key: index, text: taskString });
-	            }),
-	            this.props.location.map(function (locationString, index) {
-	              return _react2.default.createElement(_task2.default, { key: index, text: locationString });
+	            this.props.tasks.map(function (task, index) {
+	              return _react2.default.createElement(_task2.default, _extends({ key: index }, task));
 	            })
 	          )
 	        )
@@ -21868,7 +21904,7 @@
 	          'h3',
 	          null,
 	          ' ',
-	          this.props.text,
+	          this.props.message,
 	          ' '
 	        ),
 	        _react2.default.createElement(
@@ -21910,6 +21946,10 @@
 	var _marker = __webpack_require__(201);
 	
 	var _marker2 = _interopRequireDefault(_marker);
+	
+	var _taskForm = __webpack_require__(174);
+	
+	var _taskForm2 = _interopRequireDefault(_taskForm);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	

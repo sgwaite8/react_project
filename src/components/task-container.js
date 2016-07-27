@@ -3,41 +3,51 @@ import 'whatwg-fetch';
 import TaskForm from './task-form';
 import TaskList from './task-list';
 import TaskMap from './task-map';
+import Firebase from 'firebase';
+import _ from 'underscore';
 
 class TaskContainer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { task: [], location: [] };
+
+    this.state = { tasks: []};
   }
-  // componentDidMount(){
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: '/',
-  //     dataType: 'json'
-  //   })
-  //   .done(function(data){
-  //     this.setState({ task: data})
-  //   }.bind(this))
-  // }
-  _addTask(newTask){
-    let currentTasks = this.state.task;
-    currentTasks.push(newTask);
-    this.setState({task: currentTasks});
-    console.log({task: currentTasks});
-    debugger
+
+  componentWillMount() {
+    let config = {
+      apiKey: "AIzaSyB0FGjzZF8JsBu75GGFgQwabrBBrSzfz0s",
+      authDomain: "wdi6-group-project-3.firebaseapp.com",
+      databaseURL: "https://wdi6-group-project-3.firebaseio.com",
+      storageBucket: "",
+    };
+    let firebaseApp = firebase.initializeApp(config);
+    let firebaseDb = firebaseApp.database();
+
+    this.firebaseRef = firebaseDb.ref("tasks");
+    this.firebaseRef.on("value", (snapshot) => {
+      console.log(snapshot.val());
+      this.setState({ tasks: _.values( snapshot.val() ) });
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
   }
-  _addLocation(newLocation){
-    let currentLocations = this.state.location;
-    currentLocations.push(newLocation);
-    debugger
-    this.setState({location: currentLocations});
+
+  _addTask(message, location){
+    let newTask = {
+      message: message,
+      location: location
+    }
+    this.setState({tasks: this.state.tasks.concat(newTask) });
+    this.firebaseRef.push(newTask);
   }
+
   render() {
     return (
       <div>
-        <TaskForm addTask={this._addTask.bind(this)} addLocation={this._addLocation.bind(this) } />
-        <TaskList task={this.state.task} location={this.state.location} />
+        <TaskForm addTask={this._addTask.bind(this)} />
+        {/*<TaskForm addTask={this._addTask.bind(this)} addLocation={this._addLocation.bind(this) } />*/}
+        <TaskList tasks={this.state.tasks}  />
         <TaskMap />
       </div>
     );

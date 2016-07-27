@@ -1,8 +1,10 @@
 import React from 'react';
 import GoogleMap from 'google-map-react';
 import Marker from './marker';
+import TaskForm from './task-form';
 
 class TaskMap extends React.Component {
+
   render() {
     return (
       <div className="col-md-offset-6" id="map">
