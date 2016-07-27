@@ -21140,28 +21140,35 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TaskContainer).call(this, props));
 	
-	    _this.state = { task: [] };
+	    _this.state = { task: [], location: [] };
 	    return _this;
 	  }
+	  // componentDidMount(){
+	  //   $.ajax({
+	  //     method: 'GET',
+	  //     url: '/',
+	  //     dataType: 'json'
+	  //   })
+	  //   .done(function(data){
+	  //     this.setState({ task: data})
+	  //   }.bind(this))
+	  // }
+	
 	
 	  _createClass(TaskContainer, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      $.ajax({
-	        method: 'GET',
-	        url: '/',
-	        dataType: 'json'
-	      }).done(function (data) {
-	        this.setState({ task: data });
-	      }.bind(this));
-	    }
-	  }, {
 	    key: '_addTask',
 	    value: function _addTask(newTask) {
 	      var currentTasks = this.state.tasks;
 	      debugger;
-	      currentTasks.task.push(newTask);
+	      currentTasks.push(newTask);
 	      this.setState({ tasks: currentTasks });
+	    }
+	  }, {
+	    key: '_addLocation',
+	    value: function _addLocation(newLocation) {
+	      var currentLocations = this.state.locations;
+	      currentLocations.push(newLocation);
+	      this.setState({ locations: currentLocations });
 	    }
 	  }, {
 	    key: 'render',
@@ -21169,8 +21176,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
-	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks }),
+	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this), addLocation: this._addLocation.bind(this) }),
+	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks, locations: this.state.locations }),
 	        _react2.default.createElement(_taskMap2.default, { mlat: '55.0000', mlong: '-113.0000' })
 	      );
 	    }
@@ -21653,26 +21660,34 @@
 	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskForm).call(this, props));
 	  }
 	
-	  // _handleSubmit(evt) {
-	  //   evt.preventDefault();
-	
-	  //   let newTask = this.refs.newTask.value;
-	  //   let newLocation = this.refs.newLocation.value;
-	  // $.ajax({
-	  //   url: '/',
-	  //   method: 'POST',
-	  //   data: { text: newTask, location: newLocation },
-	  //   dataType: 'json'
-	  // })
-	  // .done(function(data){
-	  //   console.log(data);
-	  //   this.props.addTask(data);
-	  //   this.refs.newTask.value = '';
-	  //   this.refs.newLocation.value = '';
-	  // }.bind(this))
-	
-	
 	  _createClass(TaskForm, [{
+	    key: "_handleSubmit",
+	    value: function _handleSubmit(event) {
+	      event.preventDefault();
+	      var newTask = this.refs.newTask.value;
+	      var newLocation = this.refs.newLocation.value;
+	      this.props.addTask(newTask);
+	      this.props.addLocation(newLocation);
+	    }
+	    // _handleSubmit(evt) {
+	    //   evt.preventDefault();
+	
+	    //   let newTask = this.refs.newTask.value;
+	    //   let newLocation = this.refs.newLocation.value;
+	    // $.ajax({
+	    //   url: '/',
+	    //   method: 'POST',
+	    //   data: { text: newTask, location: newLocation },
+	    //   dataType: 'json'
+	    // })
+	    // .done(function(data){
+	    //   console.log(data);
+	    //   this.props.addTask(data);
+	    //   this.refs.newTask.value = '';
+	    //   this.refs.newLocation.value = '';
+	    // }.bind(this))
+	
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -21695,7 +21710,7 @@
 	            { className: "panel-body" },
 	            _react2.default.createElement(
 	              "form",
-	              null,
+	              { onSubmit: this._handleSubmit.bind(this) },
 	              _react2.default.createElement(
 	                "div",
 	                null,
@@ -21791,15 +21806,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'panel-body' },
-	            _react2.default.createElement(
-	              'form',
-	              { action: '/', method: 'post' },
-	              _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_task2.default, null)
-	              )
-	            )
+	            _react2.default.createElement(_task2.default, null)
 	          )
 	        )
 	      );
@@ -21854,14 +21861,14 @@
 	          'h3',
 	          null,
 	          ' ',
-	          this.props.newTask,
+	          this.props.text,
 	          ' '
 	        ),
 	        _react2.default.createElement(
 	          'p',
 	          null,
 	          ' ',
-	          this.props.newLocation,
+	          this.props.location,
 	          ' '
 	        )
 	      );
