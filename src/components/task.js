@@ -9,7 +9,7 @@ class Task extends React.Component {
   render() {
     return (
       <div>
-        <h3> {this.props.text} </h3>
+        <h3> {this.props.message} </h3>
         <p> {this.props.location} </p>
       </div>
     );
