@@ -15,11 +15,9 @@ class TaskList extends React.Component {
             <h3 className="panel-title"><input type="text" placeholder="Task List Title"/></h3>
           </div>
           <div className="panel-body">
-            <form action="/" method="post">
-          <div>
+
             <Task />
-          </div>
-            </form>
+
           </div>
         </div>
       </div>

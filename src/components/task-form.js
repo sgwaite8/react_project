@@ -5,7 +5,13 @@ class TaskForm extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  _handleSubmit(event){
+    event.preventDefault();
+    let newTask = this.refs.newTask.value;
+    let newLocation = this.refs.newLocation.value;
+    this.props.addTask(newTask);
+    this.props.addLocation(newLocation);
+  }
   // _handleSubmit(evt) {
   //   evt.preventDefault();
 
@@ -31,7 +37,7 @@ class TaskForm extends React.Component {
             <h3 className="panel-title">Input New Task</h3>
           </div>
           <div className="panel-body">
-            <form  >
+            <form onSubmit={this._handleSubmit.bind(this)} >
               <div>
                 <label>Task:</label>
                 <input ref="newTask" type="text" placeholder="New Task"/>
