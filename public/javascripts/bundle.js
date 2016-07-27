@@ -21140,37 +21140,37 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TaskContainer).call(this, props));
 	
-	    _this.state = {};
+	    _this.state = { task: [] };
 	    return _this;
 	  }
 	
-	  // _fetchMovie(searchTerm) {
-	  //
-	  //   fetch(`//www.omdbapi.com/?t=${searchTerm}&y=&plot=short&r=json`)
-	  //
-	  //     .then((response) => {
-	  //       return response.json()
-	  //     })
-	  //     .then((results) => {
-	  //       console.log(results)
-	  //       this.setState({
-	  //         movie: results
-	  //       })
-	  //     })
-	  //     .catch((ex) => {
-	  //       console.log('parsing failed', ex)
-	  //     })
-	  // }
-	
-	
 	  _createClass(TaskContainer, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $.ajax({
+	        method: 'GET',
+	        url: '/',
+	        dataType: 'json'
+	      }).done(function (data) {
+	        this.setState({ task: data });
+	      }.bind(this));
+	    }
+	  }, {
+	    key: '_addTask',
+	    value: function _addTask(newTask) {
+	      var currentTasks = this.state.tasks;
+	      debugger;
+	      currentTasks.task.push(newTask);
+	      this.setState({ tasks: currentTasks });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_taskForm2.default, null),
-	        _react2.default.createElement(_taskList2.default, null),
+	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
+	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks }),
 	        _react2.default.createElement(_taskMap2.default, { mlat: '55.0000', mlong: '-113.0000' })
 	      );
 	    }
@@ -21624,7 +21624,7 @@
 /* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21653,15 +21653,78 @@
 	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskForm).call(this, props));
 	  }
 	
+	  // _handleSubmit(evt) {
+	  //   evt.preventDefault();
+	
+	  //   let newTask = this.refs.newTask.value;
+	  //   let newLocation = this.refs.newLocation.value;
+	  // $.ajax({
+	  //   url: '/',
+	  //   method: 'POST',
+	  //   data: { text: newTask, location: newLocation },
+	  //   dataType: 'json'
+	  // })
+	  // .done(function(data){
+	  //   console.log(data);
+	  //   this.props.addTask(data);
+	  //   this.refs.newTask.value = '';
+	  //   this.refs.newLocation.value = '';
+	  // }.bind(this))
+	
+	
 	  _createClass(TaskForm, [{
-	    key: '_handleSearch',
-	    value: function _handleSearch(evt) {
-	      evt.preventDefault();
-	    }
-	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
-	      return _react2.default.createElement('div', null);
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "div",
+	          { className: "panel panel-default" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "panel-heading" },
+	            _react2.default.createElement(
+	              "h3",
+	              { className: "panel-title" },
+	              "Input New Task"
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "panel-body" },
+	            _react2.default.createElement(
+	              "form",
+	              null,
+	              _react2.default.createElement(
+	                "div",
+	                null,
+	                _react2.default.createElement(
+	                  "label",
+	                  null,
+	                  "Task:"
+	                ),
+	                _react2.default.createElement("input", { ref: "newTask", type: "text", placeholder: "New Task" })
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                null,
+	                _react2.default.createElement(
+	                  "label",
+	                  null,
+	                  "Task Location:"
+	                ),
+	                _react2.default.createElement("input", { ref: "newLocation", type: "text", placeholder: "Task Location" })
+	              ),
+	              _react2.default.createElement(
+	                "div",
+	                null,
+	                _react2.default.createElement("input", { type: "submit", value: "Enter New Task" })
+	              )
+	            )
+	          )
+	        )
+	      );
 	    }
 	  }]);
 	
@@ -21713,7 +21776,32 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_task2.default, null)
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel panel-default col-md-5' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-heading' },
+	            _react2.default.createElement(
+	              'h3',
+	              { className: 'panel-title' },
+	              _react2.default.createElement('input', { type: 'text', placeholder: 'Task List Title' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'panel-body' },
+	            _react2.default.createElement(
+	              'form',
+	              { action: '/', method: 'post' },
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_task2.default, null)
+	              )
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -21759,7 +21847,24 @@
 	  _createClass(Task, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', null);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          ' ',
+	          this.props.newTask,
+	          ' '
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          ' ',
+	          this.props.newLocation,
+	          ' '
+	        )
+	      );
 	    }
 	  }]);
 	
@@ -21814,7 +21919,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'map' },
+	        { className: 'col-md-offset-6', id: 'map' },
 	        _react2.default.createElement(
 	          _googleMapReact2.default,
 	          {

@@ -10,7 +10,18 @@ class TaskList extends React.Component {
   render() {
     return (
       <div>
-        <Task/>
+        <div className="panel panel-default col-md-5">
+          <div className="panel-heading">
+            <h3 className="panel-title"><input type="text" placeholder="Task List Title"/></h3>
+          </div>
+          <div className="panel-body">
+            <form action="/" method="post">
+          <div>
+            <Task />
+          </div>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }

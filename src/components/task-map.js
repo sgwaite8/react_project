@@ -5,7 +5,7 @@ import Marker from './marker';
 class TaskMap extends React.Component {
   render() {
     return (
-      <div id="map">
+      <div className="col-md-offset-6" id="map">
         <GoogleMap
           defaultCenter={{lat: 37.0902, lng: -95.7129}}
           defaultZoom={2}>
@@ -15,5 +15,6 @@ class TaskMap extends React.Component {
     );
   }
 }
+
 
 export default TaskMap;
