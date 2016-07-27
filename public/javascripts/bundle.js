@@ -21158,17 +21158,19 @@
 	  _createClass(TaskContainer, [{
 	    key: '_addTask',
 	    value: function _addTask(newTask) {
-	      var currentTasks = this.state.tasks;
-	      debugger;
+	      var currentTasks = this.state.task;
 	      currentTasks.push(newTask);
-	      this.setState({ tasks: currentTasks });
+	      this.setState({ task: currentTasks });
+	      console.log({ task: currentTasks });
+	      debugger;
 	    }
 	  }, {
 	    key: '_addLocation',
 	    value: function _addLocation(newLocation) {
-	      var currentLocations = this.state.locations;
+	      var currentLocations = this.state.location;
 	      currentLocations.push(newLocation);
-	      this.setState({ locations: currentLocations });
+	      debugger;
+	      this.setState({ location: currentLocations });
 	    }
 	  }, {
 	    key: 'render',
@@ -21177,8 +21179,8 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this), addLocation: this._addLocation.bind(this) }),
-	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks, locations: this.state.locations }),
-	        _react2.default.createElement(_taskMap2.default, { mlat: '55.0000', mlong: '-113.0000' })
+	        _react2.default.createElement(_taskList2.default, { task: this.state.task, location: this.state.location }),
+	        _react2.default.createElement(_taskMap2.default, null)
 	      );
 	    }
 	  }]);
@@ -21806,7 +21808,12 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'panel-body' },
-	            _react2.default.createElement(_task2.default, null)
+	            this.props.task.map(function (taskString, index) {
+	              return _react2.default.createElement(_task2.default, { key: index, text: taskString });
+	            }),
+	            this.props.location.map(function (locationString, index) {
+	              return _react2.default.createElement(_task2.default, { key: index, text: locationString });
+	            })
 	          )
 	        )
 	      );

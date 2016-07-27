@@ -16,7 +16,9 @@ class TaskList extends React.Component {
           </div>
           <div className="panel-body">
 
-            <Task />
+
+            { this.props.task.map((taskString, index) => <Task key={index} text={taskString} />) }
+            { this.props.location.map((locationString, index) => <Task key={index} text={locationString} />) }
 
           </div>
         </div>

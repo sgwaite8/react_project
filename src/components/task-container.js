@@ -21,22 +21,24 @@ class TaskContainer extends React.Component {
   //   }.bind(this))
   // }
   _addTask(newTask){
-    let currentTasks = this.state.tasks;
-    debugger
+    let currentTasks = this.state.task;
     currentTasks.push(newTask);
-    this.setState({tasks: currentTasks});
+    this.setState({task: currentTasks});
+    console.log({task: currentTasks});
+    debugger
   }
   _addLocation(newLocation){
-    let currentLocations = this.state.locations;
+    let currentLocations = this.state.location;
     currentLocations.push(newLocation);
-    this.setState({locations: currentLocations});
+    debugger
+    this.setState({location: currentLocations});
   }
   render() {
     return (
       <div>
         <TaskForm addTask={this._addTask.bind(this)} addLocation={this._addLocation.bind(this) } />
-        <TaskList tasks={this.state.tasks} locations={this.state.locations} />
-        <TaskMap mlat="55.0000" mlong="-113.0000"/>
+        <TaskList task={this.state.task} location={this.state.location} />
+        <TaskMap />
       </div>
     );
   }
