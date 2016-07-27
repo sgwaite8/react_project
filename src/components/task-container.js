@@ -2,7 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import TaskForm from './task-form';
 import TaskList from './task-list';
-import TaskMap from './task-map';
+
 
 class TaskContainer extends React.Component {
 
@@ -39,7 +39,6 @@ class TaskContainer extends React.Component {
       <div>
         <TaskForm addTask={this._addTask.bind(this)} addLocation={this._addLocation.bind(this) } />
         <TaskList task={this.state.task} location={this.state.location} />
-        <TaskMap />
       </div>
     );
   }

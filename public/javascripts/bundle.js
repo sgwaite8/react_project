@@ -21120,10 +21120,6 @@
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
-	var _taskMap = __webpack_require__(177);
-	
-	var _taskMap2 = _interopRequireDefault(_taskMap);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21179,8 +21175,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this), addLocation: this._addLocation.bind(this) }),
-	        _react2.default.createElement(_taskList2.default, { task: this.state.task, location: this.state.location }),
-	        _react2.default.createElement(_taskMap2.default, null)
+	        _react2.default.createElement(_taskList2.default, { task: this.state.task, location: this.state.location })
 	      );
 	    }
 	  }]);
@@ -21645,6 +21640,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _taskMap = __webpack_require__(177);
+	
+	var _taskMap2 = _interopRequireDefault(_taskMap);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21670,20 +21669,11 @@
 	      var autocomplete = new google.maps.places.Autocomplete(input, options);
 	      google.maps.event.addListener(autocomplete, 'place_changed', function () {
 	        var thisplace = autocomplete.getPlace();
-	        console.log(thisplace);
-	        debugger;
+	        var lat = thisplace.geometry.location.lat();
+	        var lng = thisplace.geometry.location.lng();
+	        console.log(lat, lng);
 	      });
 	    }
-	
-	    // _handleAutocomplete() {
-	    //   var input = document.getElementById('searchTextField');
-	    //   var autocomplete = new google.maps.places.Autocomplete(input);
-	    //   autocomplete.bindTo('bounds', map);
-	    //   console.log(autocomplete);
-	    // }
-	    // google.maps.event.addDomListener(window, 'load', initialize);
-	
-	
 	  }, {
 	    key: '_handleSubmit',
 	    value: function _handleSubmit(event) {
@@ -21763,7 +21753,8 @@
 	              )
 	            )
 	          )
-	        )
+	        ),
+	        _react2.default.createElement(_taskMap2.default, null)
 	      );
 	    }
 	  }]);
@@ -21934,10 +21925,6 @@
 	
 	var _marker2 = _interopRequireDefault(_marker);
 	
-	var _taskForm = __webpack_require__(174);
-	
-	var _taskForm2 = _interopRequireDefault(_taskForm);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21966,7 +21953,7 @@
 	          {
 	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
 	            defaultZoom: 10 },
-	          _react2.default.createElement(_marker2.default, { className: 'marker', lat: thisplace.geometry.location.lat(), lng: thisplace.geometry.location.lng(), text: 'W' })
+	          _react2.default.createElement(_marker2.default, { className: 'marker', lat: 30.2672, lng: -97.7431, text: 'W' })
 	        )
 	      );
 	    }
