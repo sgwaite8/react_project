@@ -21171,7 +21171,7 @@
 	        null,
 	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
 	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks }),
-	        _react2.default.createElement(_taskMap2.default, { mlat: '55.0000', mlong: '-113.0000' })
+	        _react2.default.createElement(_taskMap2.default, null)
 	      );
 	    }
 	  }]);
@@ -21624,7 +21624,7 @@
 /* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21653,73 +21653,82 @@
 	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskForm).call(this, props));
 	  }
 	
-	  // _handleSubmit(evt) {
-	  //   evt.preventDefault();
-	
-	  //   let newTask = this.refs.newTask.value;
-	  //   let newLocation = this.refs.newLocation.value;
-	  // $.ajax({
-	  //   url: '/',
-	  //   method: 'POST',
-	  //   data: { text: newTask, location: newLocation },
-	  //   dataType: 'json'
-	  // })
-	  // .done(function(data){
-	  //   console.log(data);
-	  //   this.props.addTask(data);
-	  //   this.refs.newTask.value = '';
-	  //   this.refs.newLocation.value = '';
-	  // }.bind(this))
-	
-	
 	  _createClass(TaskForm, [{
-	    key: "render",
+	    key: '_initialize',
+	    value: function _initialize() {
+	      var input = document.getElementById('searchTextField');
+	      var autocomplete = new google.maps.places.Autocomplete(input);
+	      debugger;
+	      autocomplete.bindTo('bounds', map);
+	    }
+	    // google.maps.event.addDomListener(window, 'load', initialize);
+	
+	    // _handleSubmit(evt) {
+	    //   evt.preventDefault();
+	
+	    //   let newTask = this.refs.newTask.value;
+	    //   let newLocation = this.refs.newLocation.value;
+	    // $.ajax({
+	    //   url: '/',
+	    //   method: 'POST',
+	    //   data: { text: newTask, location: newLocation },
+	    //   dataType: 'json'
+	    // })
+	    // .done(function(data){
+	    //   console.log(data);
+	    //   this.props.addTask(data);
+	    //   this.refs.newTask.value = '';
+	    //   this.refs.newLocation.value = '';
+	    // }.bind(this))
+	
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
+	        'div',
 	        null,
 	        _react2.default.createElement(
-	          "div",
-	          { className: "panel panel-default" },
+	          'div',
+	          { className: 'panel panel-default' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "panel-heading" },
+	            'div',
+	            { className: 'panel-heading' },
 	            _react2.default.createElement(
-	              "h3",
-	              { className: "panel-title" },
-	              "Input New Task"
+	              'h3',
+	              { className: 'panel-title' },
+	              'Input New Task'
 	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "panel-body" },
+	            'div',
+	            { className: 'panel-body' },
 	            _react2.default.createElement(
-	              "form",
+	              'form',
 	              null,
 	              _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
 	                _react2.default.createElement(
-	                  "label",
+	                  'label',
 	                  null,
-	                  "Task:"
+	                  'Task:'
 	                ),
-	                _react2.default.createElement("input", { ref: "newTask", type: "text", placeholder: "New Task" })
+	                _react2.default.createElement('input', { ref: 'newTask', type: 'text', placeholder: 'New Task' })
 	              ),
 	              _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
 	                _react2.default.createElement(
-	                  "label",
+	                  'label',
 	                  null,
-	                  "Task Location:"
+	                  'Task Location:'
 	                ),
-	                _react2.default.createElement("input", { ref: "newLocation", type: "text", placeholder: "Task Location" })
+	                _react2.default.createElement('input', { onKeyUp: this._initialize, id: 'searchTextField', ref: 'newLocation', type: 'text', placeholder: 'Task Location' })
 	              ),
 	              _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
-	                _react2.default.createElement("input", { type: "submit", value: "Enter New Task" })
+	                _react2.default.createElement('input', { type: 'submit', value: 'Enter New Task' })
 	              )
 	            )
 	          )
@@ -21925,7 +21934,7 @@
 	          {
 	            defaultCenter: { lat: 37.0902, lng: -95.7129 },
 	            defaultZoom: 2 },
-	          _react2.default.createElement(_marker2.default, { className: 'marker', lat: 30.2672, lng: -97.7431, text: 'W' })
+	          _react2.default.createElement(_marker2.default, { className: 'marker', lat: 30.2672, lng: -97.7431, text: '#' })
 	        )
 	      );
 	    }

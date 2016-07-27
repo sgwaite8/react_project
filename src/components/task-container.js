@@ -26,12 +26,13 @@ class TaskContainer extends React.Component {
     currentTasks.task.push(newTask);
     this.setState({tasks: currentTasks});
   }
+
   render() {
     return (
       <div>
         <TaskForm addTask={this._addTask.bind(this)} />
         <TaskList tasks={this.state.tasks} />
-        <TaskMap mlat="55.0000" mlong="-113.0000"/>
+        <TaskMap/>
       </div>
     );
   }
