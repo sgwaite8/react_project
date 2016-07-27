@@ -6,15 +6,46 @@ class TaskForm extends React.Component {
     super(props);
   }
 
-  _handleSearch(evt) {
-    evt.preventDefault();
+  // _handleSubmit(evt) {
+  //   evt.preventDefault();
 
-  }
-
+  //   let newTask = this.refs.newTask.value;
+  //   let newLocation = this.refs.newLocation.value;
+    // $.ajax({
+    //   url: '/',
+    //   method: 'POST',
+    //   data: { text: newTask, location: newLocation },
+    //   dataType: 'json'
+    // })
+    // .done(function(data){
+    //   console.log(data);
+    //   this.props.addTask(data);
+    //   this.refs.newTask.value = '';
+    //   this.refs.newLocation.value = '';
+    // }.bind(this))
   render() {
     return (
       <div>
-        Form
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">Input New Task</h3>
+          </div>
+          <div className="panel-body">
+            <form  >
+              <div>
+                <label>Task:</label>
+                <input ref="newTask" type="text" placeholder="New Task"/>
+              </div>
+              <div>
+                <label>Task Location:</label>
+                <input ref="newLocation" type="text" placeholder="Task Location"/>
+              </div>
+              <div>
+                <input  type="submit" value="Enter New Task"/>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }

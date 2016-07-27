@@ -9,7 +9,8 @@ class Task extends React.Component {
   render() {
     return (
       <div>
-      
+        <h3> {this.props.newTask} </h3>
+        <p> {this.props.newLocation} </p>
       </div>
     );
   }
