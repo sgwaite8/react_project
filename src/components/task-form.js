@@ -6,12 +6,23 @@ class TaskForm extends React.Component {
     super(props);
   }
 
-  _initialize() {
+  componentDidMount() {
     var input = document.getElementById('searchTextField');
-    var autocomplete = new google.maps.places.Autocomplete(input);
-    debugger
-    autocomplete.bindTo('bounds', map);
+    var options = {componentRestrictions: {country: 'us'}};
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+      var thisplace = autocomplete.getPlace();
+      console.log(thisplace);
+      debugger
+    });
   }
+
+  // _handleAutocomplete() {
+  //   var input = document.getElementById('searchTextField');
+  //   var autocomplete = new google.maps.places.Autocomplete(input);
+  //   autocomplete.bindTo('bounds', map);
+  //   console.log(autocomplete);
+  // }
   // google.maps.event.addDomListener(window, 'load', initialize);
 
 
@@ -21,6 +32,7 @@ class TaskForm extends React.Component {
     let newLocation = this.refs.newLocation.value;
     this.props.addTask(newTask);
     this.props.addLocation(newLocation);
+  }
 
   // _handleSubmit(evt) {
   //   evt.preventDefault();
@@ -54,10 +66,10 @@ class TaskForm extends React.Component {
               </div>
               <div>
                 <label>Task Location:</label>
-                <input onKeyUp={this._initialize} id="searchTextField" ref="newLocation" type="text" placeholder="Task Location"/>
+                <input id="searchTextField" ref="newLocation" type="text" placeholder="Task Location"/>
               </div>
               <div>
-                <input  type="submit" value="Enter New Task"/>
+                <input type="submit" value="Enter New Task"/>
               </div>
             </form>
           </div>
