@@ -15,9 +15,9 @@ class Task extends React.Component {
   }
   render() {
     return (
-      <div>
-        <input type="checkbox" value=""  /><h3>{this.props.message}</h3>
-      <p>{this.props.location}</p><i onClick={ this._handleClick.bind(this) } className="fa fa-trash" aria-hidden="true"></i>
+      <div className="indTask ">
+        <input className="checkbox" type="checkbox" value="" /> <h3 className="task">{this.props.message}</h3>
+        <p className="task">{this.props.location}</p><i onClick={ this._handleClick.bind(this) } className="fa fa-trash fa-2x" aria-hidden="true"></i>
       </div>
     );
   }

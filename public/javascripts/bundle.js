@@ -21738,7 +21738,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'panel-body' },
+	            { className: 'panel-body newTaskInput' },
 	            _react2.default.createElement(
 	              'form',
 	              { onSubmit: this._handleSubmit.bind(this) },
@@ -21750,22 +21750,14 @@
 	                  null,
 	                  'Task:'
 	                ),
-	                _react2.default.createElement('input', { ref: 'newTask', type: 'text', placeholder: 'New Task' })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                null,
+	                _react2.default.createElement('input', { ref: 'newTask', type: 'text', placeholder: 'New Task' }),
 	                _react2.default.createElement(
 	                  'label',
 	                  null,
 	                  'Task Location:'
 	                ),
-	                _react2.default.createElement('input', { id: 'searchTextField', ref: 'newLocation', type: 'text', placeholder: 'Task Location' })
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement('input', { type: 'submit', value: 'Enter New Task' })
+	                _react2.default.createElement('input', { id: 'searchTextField', ref: 'newLocation', type: 'text', placeholder: 'Task Location' }),
+	                _react2.default.createElement('input', { className: 'button', type: 'submit', value: 'Enter New Task' })
 	              )
 	            )
 	          )
@@ -24808,7 +24800,7 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'task-list' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel panel-default col-md-5' },
@@ -24889,19 +24881,20 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement('input', { type: 'checkbox', value: '' }),
+	        { className: 'indTask ' },
+	        _react2.default.createElement('input', { className: 'checkbox', type: 'checkbox', value: '' }),
+	        ' ',
 	        _react2.default.createElement(
 	          'h3',
-	          null,
+	          { className: 'task' },
 	          this.props.message
 	        ),
 	        _react2.default.createElement(
 	          'p',
-	          null,
+	          { className: 'task' },
 	          this.props.location
 	        ),
-	        _react2.default.createElement('i', { onClick: this._handleClick.bind(this), className: 'fa fa-trash', 'aria-hidden': 'true' })
+	        _react2.default.createElement('i', { onClick: this._handleClick.bind(this), className: 'fa fa-trash fa-2x', 'aria-hidden': 'true' })
 	      );
 	    }
 	  }]);

@@ -5,7 +5,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /*background-color: #D7CEC7;*/
+  background-color: #D7CEC7;
+  color: #565656;
 }
 
 a {
@@ -21,12 +22,12 @@ html, body {
 h1 {
   font-family: 'PT Serif', serif;
   font-weight: bold;
-  font-size: 100px;
+  font-size: 135px;
 }
 
 h2{
   font-family: 'Raleway', sans-serif;
-  font-size: 73px;
+  font-size: 59px;
   margin-top: -27px;
 }
 
@@ -39,15 +40,108 @@ i {
   color: #76323F;
 }
 
-.panel {
-  /*background-color: #D7CEC7;*/
+input {
+  margin-right: 15px;
 }
 
+label {
+  margin-right: 5px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.button {
+  font-weight: bold;
+  color: #D7CEC7;
+  height: 32px;
+  border-radius: 5px;
+  background-color: #76323F;
+}
+
+h3.panel-title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
+.checkbox {
+  display: inline-box;
+}
+
+input[type="checkbox"]{
+  display: -webkit-inline-box;
+}
+
+/*input[type="checkbox"]{
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 3px;
+  border: 2px solid #555;
+  margin-top: 5px;
+  vertical-align: top;
+  display: inline-block;
+}
+input[type="checkbox"]:checked {
+    background: #black;
+}*/
+
+h3.task {
+  display: inline-block;
+  margin:0 0 5px 10px;
+  max-width: 90%;
+}
+
+.indTask{
+  position: relative;
+  margin-bottom: 40px;
+  padding-right: 25px;
+}
+
+.indTask i{
+  position: absolute;
+  right: 0;
+  top: 10px;
+  cursor: pointer;
+}
+
+.indTask i:hover{
+  color: yellow;
+}
+.indTask p{
+  margin-left: 30px;
+}
+
+.panel-default {
+  background-color: #D7CEC7;
+  margin: 10px;
+}
+
+.panel-default>.panel-heading {
+  background-color: #C09F80;
+}
+
+.newTaskInput {
+  text-align: center;
+}
+
+#searchTextField {
+  width: 400px;
+}
 
 #map {
   height: 500px;
-  width: 50%
+  width: 49%;
+  display: inline-block;
 }
+
+/*.task-list{
+  display: inline-block;
+  width: 49%;
+}*/
 
 /*.task-panel, .task-panel {
   min-height: 10;

@@ -33,7 +33,7 @@ Next, we took a "divide and conquer" approach with the following steps:
 
 We worked as a group, pair programmed and worked individually throughout the project week.
 
-![MVP](public/images/mvpbonus.jpg)
+![MVP](public/images/mvpbonus.jpeg)
 
 ## User Stories
 * User comes to site

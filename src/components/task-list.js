@@ -10,7 +10,7 @@ class TaskList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="task-list">
         <div className="panel panel-default col-md-5">
           <div className="panel-heading">
             <h3 className="panel-title"><input type="text" placeholder="Task List Title"/></h3>
