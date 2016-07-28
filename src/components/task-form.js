@@ -1,6 +1,9 @@
 import React from 'react';
 import TaskMap from './task-map';
+<<<<<<< HEAD
 
+=======
+>>>>>>> christian
 
 class TaskForm extends React.Component {
 
@@ -79,7 +82,7 @@ class TaskForm extends React.Component {
             </form>
           </div>
         </div>
-        <TaskMap latLng={this._getLatLng.bind(this)}/>
+        <TaskMap />
       </div>
     );
   }

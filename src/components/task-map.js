@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleMap from 'google-map-react';
 import Marker from './marker';
-import TaskForm from './task-form';
+
 
 class TaskMap extends React.Component {
 

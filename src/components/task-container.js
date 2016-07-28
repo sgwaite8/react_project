@@ -2,8 +2,12 @@ import React from 'react';
 import 'whatwg-fetch';
 import TaskForm from './task-form';
 import TaskList from './task-list';
+<<<<<<< HEAD
 import Firebase from 'firebase';
 import _ from 'underscore';
+=======
+
+>>>>>>> christian
 
 class TaskContainer extends React.Component {
 
@@ -44,9 +48,14 @@ class TaskContainer extends React.Component {
   render() {
     return (
       <div>
+<<<<<<< HEAD
         <TaskForm addTask={this._addTask.bind(this)} />
         {/*<TaskForm addTask={this._addTask.bind(this)} addLocation={this._addLocation.bind(this) } />*/}
         <TaskList tasks={this.state.tasks}  />
+=======
+        <TaskForm addTask={this._addTask.bind(this)} addLocation={this._addLocation.bind(this) } />
+        <TaskList task={this.state.task} location={this.state.location} />
+>>>>>>> christian
       </div>
     );
   }
