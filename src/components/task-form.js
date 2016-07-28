@@ -1,9 +1,5 @@
 import React from 'react';
 import TaskMap from './task-map';
-<<<<<<< HEAD
-
-=======
->>>>>>> christian
 
 class TaskForm extends React.Component {
 
