@@ -17,4 +17,11 @@ router.post('/', function(req, res, next){
   })
 });
 
+router.delete('/:id', function(req, res,next){
+  Task.findByIdAndRemove(req.params.id, function(err, task){
+    if (err) console.log(err);
+    res.json(task);
+  });
+})
+
 module.exports = router;
