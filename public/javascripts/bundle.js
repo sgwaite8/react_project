@@ -21764,7 +21764,7 @@
 	                  'Task Location:'
 	                ),
 	                _react2.default.createElement('input', { id: 'searchTextField', ref: 'newLocation', type: 'text', placeholder: 'Task Location' }),
-	                _react2.default.createElement('input', { type: 'submit', value: 'Enter New Task' })
+	                _react2.default.createElement('input', { className: 'button', type: 'submit', value: 'Enter New Task' })
 	              )
 	            )
 	          )

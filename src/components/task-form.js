@@ -73,7 +73,7 @@ class TaskForm extends React.Component {
                 <input id="searchTextField" ref="newLocation" type="text" placeholder="Task Location"/>
 
 
-                <input type="submit" value="Enter New Task"/>
+                <input className="button" type="submit" value="Enter New Task"/>
               </div>
             </form>
           </div>
