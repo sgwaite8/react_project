@@ -21124,10 +21124,6 @@
 	
 	var _firebase2 = _interopRequireDefault(_firebase);
 	
-	var _underscore = __webpack_require__(204);
-	
-	var _underscore2 = _interopRequireDefault(_underscore);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21135,6 +21131,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// import _ from 'underscore';
 	
 	var TaskContainer = function (_React$Component) {
 	  _inherits(TaskContainer, _React$Component);
@@ -21144,7 +21142,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TaskContainer).call(this, props));
 	
-	    _this.state = { tasks: [] };
+	    _this.state = { tasks: {} };
 	    return _this;
 	  }
 	
@@ -21165,7 +21163,7 @@
 	      this.firebaseRef = firebaseDb.ref("tasks");
 	      this.firebaseRef.on("value", function (snapshot) {
 	        console.log(snapshot.val());
-	        _this2.setState({ tasks: _underscore2.default.values(snapshot.val()) });
+	        _this2.setState({ tasks: snapshot.val() });
 	      }, function (errorObject) {
 	        console.log("The read failed: " + errorObject.code);
 	      });
@@ -21177,7 +21175,6 @@
 	        message: message,
 	        location: location
 	      };
-	      this.setState({ tasks: this.state.tasks.concat(newTask) });
 	      this.firebaseRef.push(newTask);
 	    }
 	  }, {
@@ -21187,7 +21184,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
-	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks })
+	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks, firebaseRef: this.firebaseRef })
 	      );
 	    }
 	  }]);
@@ -21707,7 +21704,7 @@
 	      this.props.addTask(newTask, newLocation);
 	      // this.props.addLocation(newLocation);
 	      this.refs.newTask.value = '';
-	      // this.refs.newLocation.value = '';
+	      this.refs.newLocation.value = '';
 	    }
 	
 	    // _handleSubmit(evt) {
@@ -21845,7 +21842,7 @@
 	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
 	            defaultZoom: 10 },
 	          this.props.coordinates.map(function (coordinate, i) {
-	            return _react2.default.createElement(_marker2.default, _extends({ key: i, className: 'marker' }, coordinate, { text: 'W' }));
+	            return _react2.default.createElement(_marker2.default, _extends({ key: i, className: 'marker' }, coordinate, { text: '' }));
 	          })
 	        )
 	      );
@@ -24673,7 +24670,7 @@
 /* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -24703,12 +24700,12 @@
 	  }
 	
 	  _createClass(Marker, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
-	        this.props.text
+	        _react2.default.createElement("i", { className: "fa fa-map-marker fa-3x", "aria-hidden": "true" })
 	      );
 	    }
 	  }]);
@@ -24740,6 +24737,10 @@
 	
 	var _task2 = _interopRequireDefault(_task);
 	
+	var _underscore = __webpack_require__(204);
+	
+	var _underscore2 = _interopRequireDefault(_underscore);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24760,6 +24761,8 @@
 	  _createClass(TaskList, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -24778,8 +24781,8 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'panel-body' },
-	            this.props.tasks.map(function (task, index) {
-	              return _react2.default.createElement(_task2.default, _extends({ taskId: task.id, key: index }, task));
+	            _underscore2.default.map(this.props.tasks, function (task, id) {
+	              return _react2.default.createElement(_task2.default, _extends({ key: id }, task, { id: id, firebaseRef: _this2.props.firebaseRef }));
 	            })
 	          )
 	        )
@@ -24808,6 +24811,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _firebase = __webpack_require__(202);
+	
+	var _firebase2 = _interopRequireDefault(_firebase);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24830,13 +24837,8 @@
 	    value: function _handleClick() {
 	      var confirmed = confirm("Are you sure?");
 	      if (confirmed) {
-	        $.ajax({
-	          method: 'DELETE',
-	          url: '/' + this.props.taskId,
-	          dataType: 'json'
-	        }).done(function (data) {
-	          this.setState({ display: false });
-	        }.bind(this));
+	        var firebaseRef = this.props.firebaseRef.child(this.props.id);
+	        firebaseRef.remove();
 	      }
 	    }
 	  }, {
