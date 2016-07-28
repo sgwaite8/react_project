@@ -48,7 +48,7 @@ We worked as a group, pair programmed and worked individually throughout the pro
 1. Clone the repository to your local machine
 2. Run `npm install` inside the directory to install all the dependecies used in this project.
 3. Once the dependecies are installed, you can run `nodemon` in terminal and visit localhost:3000 to view the web app locally.
-4. The website can be viewed online at ****** as well.
+4. The website can be viewed online at http://task-lister.herokuapp.com/ as well.
 
 
 ## Unsolved Problems
