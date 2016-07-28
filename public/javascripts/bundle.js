@@ -21120,10 +21120,6 @@
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
-	var _taskMap = __webpack_require__(177);
-	
-	var _taskMap2 = _interopRequireDefault(_taskMap);
-	
 	var _firebase = __webpack_require__(202);
 	
 	var _firebase2 = _interopRequireDefault(_firebase);
@@ -21191,8 +21187,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
-	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks }),
-	        _react2.default.createElement(_taskMap2.default, null)
+	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks })
 	      );
 	    }
 	  }]);
@@ -21657,6 +21652,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _taskMap = __webpack_require__(177);
+	
+	var _taskMap2 = _interopRequireDefault(_taskMap);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21671,31 +21670,34 @@
 	  function TaskForm(props) {
 	    _classCallCheck(this, TaskForm);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskForm).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TaskForm).call(this, props));
+	
+	    _this.state = {
+	      coordinates: []
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(TaskForm, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      this._getLatLng();
+	    }
+	  }, {
+	    key: '_getLatLng',
+	    value: function _getLatLng() {
 	      var input = document.getElementById('searchTextField');
 	      var options = { componentRestrictions: { country: 'us' } };
 	      var autocomplete = new google.maps.places.Autocomplete(input, options);
 	      google.maps.event.addListener(autocomplete, 'place_changed', function () {
 	        var thisplace = autocomplete.getPlace();
-	        console.log(thisplace);
-	        debugger;
-	      });
+	        var coords = {
+	          lat: thisplace.geometry.location.lat(),
+	          lng: thisplace.geometry.location.lng()
+	        };
+	        this.setState({ coordinates: this.state.coordinates.concat(coords) });
+	      }.bind(this));
 	    }
-	
-	    // _handleAutocomplete() {
-	    //   var input = document.getElementById('searchTextField');
-	    //   var autocomplete = new google.maps.places.Autocomplete(input);
-	    //   autocomplete.bindTo('bounds', map);
-	    //   console.log(autocomplete);
-	    // }
-	    // google.maps.event.addDomListener(window, 'load', initialize);
-	
-	
 	  }, {
 	    key: '_handleSubmit',
 	    value: function _handleSubmit(event) {
@@ -21777,7 +21779,8 @@
 	              )
 	            )
 	          )
-	        )
+	        ),
+	        _react2.default.createElement(_taskMap2.default, null)
 	      );
 	    }
 	  }]);
@@ -21958,10 +21961,6 @@
 	var _marker = __webpack_require__(201);
 	
 	var _marker2 = _interopRequireDefault(_marker);
-	
-	var _taskForm = __webpack_require__(174);
-	
-	var _taskForm2 = _interopRequireDefault(_taskForm);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
