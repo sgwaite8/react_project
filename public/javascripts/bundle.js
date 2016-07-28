@@ -21120,9 +21120,17 @@
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
+	var _taskMap = __webpack_require__(175);
+	
+	var _taskMap2 = _interopRequireDefault(_taskMap);
+	
 	var _firebase = __webpack_require__(202);
 	
 	var _firebase2 = _interopRequireDefault(_firebase);
+	
+	var _underscore = __webpack_require__(204);
+	
+	var _underscore2 = _interopRequireDefault(_underscore);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21162,7 +21170,6 @@
 	
 	      this.firebaseRef = firebaseDb.ref("tasks");
 	      this.firebaseRef.on("value", function (snapshot) {
-	        console.log(snapshot.val());
 	        _this2.setState({ tasks: snapshot.val() });
 	      }, function (errorObject) {
 	        console.log("The read failed: " + errorObject.code);
@@ -21170,11 +21177,13 @@
 	    }
 	  }, {
 	    key: '_addTask',
-	    value: function _addTask(message, location) {
+	    value: function _addTask(message, location, latLng) {
 	      var newTask = {
 	        message: message,
-	        location: location
+	        location: location,
+	        latLng: latLng
 	      };
+	
 	      this.firebaseRef.push(newTask);
 	    }
 	  }, {
@@ -21184,6 +21193,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
+	        _react2.default.createElement(_taskMap2.default, { tasks: _underscore2.default.values(this.state.tasks) }),
 	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks, firebaseRef: this.firebaseRef })
 	      );
 	    }
@@ -21649,10 +21659,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _taskMap = __webpack_require__(175);
-	
-	var _taskMap2 = _interopRequireDefault(_taskMap);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21670,7 +21676,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TaskForm).call(this, props));
 	
 	    _this.state = {
-	      coordinates: []
+	      latLng: null
 	    };
 	    return _this;
 	  }
@@ -21688,11 +21694,8 @@
 	      var autocomplete = new google.maps.places.Autocomplete(input, options);
 	      google.maps.event.addListener(autocomplete, 'place_changed', function () {
 	        var thisplace = autocomplete.getPlace();
-	        var coords = {
-	          lat: thisplace.geometry.location.lat(),
-	          lng: thisplace.geometry.location.lng()
-	        };
-	        this.setState({ coordinates: this.state.coordinates.concat(coords) });
+	        var coords = { lat: thisplace.geometry.location.lat(), lng: thisplace.geometry.location.lng() };
+	        this.setState({ latLng: coords });
 	      }.bind(this));
 	    }
 	  }, {
@@ -21702,30 +21705,19 @@
 	
 	      var newTask = this.refs.newTask.value;
 	      var newLocation = this.refs.newLocation.value;
-	      this.props.addTask(newTask, newLocation);
-	      // this.props.addLocation(newLocation);
-	      this.refs.newTask.value = '';
-	      this.refs.newLocation.value = '';
+	      var newLatLng = this.state.latLng;
+	
+	      if (newTask && newLocation) {
+	        this.props.addTask(newTask, newLocation, newLatLng);
+	        this.setState({
+	          latLng: null
+	        });
+	        this.refs.newTask.value = '';
+	        this.refs.newLocation.value = '';
+	      } else {
+	        alert("You need both a task and a location.");
+	      }
 	    }
-	
-	    // _handleSubmit(evt) {
-	    //   evt.preventDefault();
-	
-	    //   let newTask = this.refs.newTask.value;
-	    //   let newLocation = this.refs.newLocation.value;
-	    // $.ajax({
-	    //   url: '/',
-	    //   method: 'POST',
-	    //   data: { text: newTask, location: newLocation },
-	    //   dataType: 'json'
-	    // })
-	    // .done(function(data){
-	    //   console.log(data);
-	    //   this.props.addTask(data);
-	    //   this.refs.newTask.value = '';
-	    //   this.refs.newLocation.value = '';
-	    // }.bind(this))
-	
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -21777,8 +21769,7 @@
 	              )
 	            )
 	          )
-	        ),
-	        _react2.default.createElement(_taskMap2.default, { coordinates: this.state.coordinates })
+	        )
 	      );
 	    }
 	  }]);
@@ -21797,8 +21788,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -21835,30 +21824,72 @@
 	    key: '_onMapLoad',
 	    value: function _onMapLoad(mapsObject) {
 	      this.googleMap = mapsObject.map;
-	      this.directionsService = new mapsObject.maps.DirectionsService();
-	      this.directionsDisplay = new mapsObject.maps.DirectionsRenderer({ map: this.googleMap });
-	      this.stepDisplay = new mapsObject.maps.InfoWindow();
+	      this.mapsApi = mapsObject.maps;
+	      this.directionsService = new this.mapsApi.DirectionsService();
+	      this.directionsDisplay = new this.mapsApi.DirectionsRenderer({ map: this.googleMap });
+	      this.stepDisplay = new this.mapsApi.InfoWindow();
+	    }
+	  }, {
+	    key: '_formatWaypoints',
+	    value: function _formatWaypoints() {
+	      var _this2 = this;
+	
+	      return this.props.tasks.map(function (task, i) {
+	        var location = new _this2.mapsApi.LatLng(task.latLng.lat, task.latLng.lng);
+	        return { location: location, stopover: true };
+	      });
 	    }
 	  }, {
 	    key: '_getDirections',
-	    value: function _getDirections() {}
+	    value: function _getDirections(waypoints) {
+	      var _this3 = this;
+	
+	      var startingTask = waypoints.shift();
+	      var endingTask = waypoints.pop();
+	      this.directionsService.route({
+	        origin: startingTask.location,
+	        destination: endingTask.location,
+	        waypoints: waypoints,
+	        optimizeWaypoints: true,
+	        travelMode: 'DRIVING'
+	      }, function (response, status) {
+	        if (status === 'OK') {
+	
+	          _this3.directionsDisplay.setDirections(response);
+	          // var route = response.routes[0];
+	          // var summaryPanel = document.getElementById('directions-panel');
+	          // summaryPanel.innerHTML = '';
+	          // // For each route, display summary information.
+	          // for (var i = 0; i < route.legs.length; i++) {
+	          //   var routeSegment = i + 1;
+	          //   summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+	          //       '</b><br>';
+	          //   summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+	          //   summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+	          //   summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+	          // }
+	          console.log(response.routes[0].legs);
+	        } else {
+	          window.alert('Directions request failed due to ' + status);
+	        }
+	      });
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      if (this.googleMap && this.props.tasks.length > 1) {
+	        var waypoints = this._formatWaypoints();
+	        this._getDirections(waypoints);
+	      }
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'col-md-offset-6', id: 'map' },
-	        _react2.default.createElement('input', { type: 'submit', value: 'Get a Route' }),
-	        _react2.default.createElement(
-	          _googleMapReact2.default,
-	          {
-	            onGoogleApiLoaded: this._onMapLoad.bind(this),
-	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
-	            defaultZoom: 10 },
-	          this.props.coordinates.map(function (coordinate, i) {
-	            return _react2.default.createElement(_marker2.default, _extends({ key: i, className: 'marker' }, coordinate, { text: '' }));
-	          })
-	        )
+	        _react2.default.createElement(_googleMapReact2.default, {
+	          yesIWantToUseGoogleMapApiInternals: true,
+	          onGoogleApiLoaded: this._onMapLoad.bind(this),
+	          defaultCenter: { lat: 30.2672, lng: -97.7431 },
+	          defaultZoom: 10 })
 	      );
 	    }
 	  }]);
@@ -24739,8 +24770,6 @@
 	  value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
@@ -24796,7 +24825,7 @@
 	            'div',
 	            { className: 'panel-body' },
 	            _underscore2.default.map(this.props.tasks, function (task, id) {
-	              return _react2.default.createElement(_task2.default, _extends({ key: id }, task, { id: id, firebaseRef: _this2.props.firebaseRef }));
+	              return _react2.default.createElement(_task2.default, { key: id, message: task.message, location: task.location, id: id, firebaseRef: _this2.props.firebaseRef });
 	            })
 	          )
 	        )

@@ -2,7 +2,9 @@ import React from 'react';
 import 'whatwg-fetch';
 import TaskForm from './task-form';
 import TaskList from './task-list';
+import TaskMap from './task-map';
 import Firebase from 'firebase';
+import _ from 'underscore';
 // import _ from 'underscore';
 
 class TaskContainer extends React.Component {
@@ -25,18 +27,19 @@ class TaskContainer extends React.Component {
 
     this.firebaseRef = firebaseDb.ref("tasks");
     this.firebaseRef.on("value", (snapshot) => {
-      console.log(snapshot.val());
       this.setState({ tasks: snapshot.val() });
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
   }
 
-  _addTask(message, location){
+  _addTask(message, location, latLng){
     let newTask = {
       message: message,
-      location: location
+      location: location,
+      latLng: latLng
     }
+
     this.firebaseRef.push(newTask);
   }
 
@@ -44,7 +47,7 @@ class TaskContainer extends React.Component {
     return (
       <div>
         <TaskForm addTask={this._addTask.bind(this)} />
-        {/*<TaskForm addTask={this._addTask.bind(this)} addLocation={this._addLocation.bind(this) } />*/}
+        <TaskMap tasks={_.values(this.state.tasks)} />
         <TaskList tasks={this.state.tasks} firebaseRef={this.firebaseRef} />
       </div>
     );
