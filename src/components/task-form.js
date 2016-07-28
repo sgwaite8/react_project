@@ -62,17 +62,17 @@ class TaskForm extends React.Component {
           <div className="panel-heading">
             <h3 className="panel-title">Input New Task</h3>
           </div>
-          <div className="panel-body">
+          <div className="panel-body newTaskInput">
             <form onSubmit={this._handleSubmit.bind(this)} >
               <div>
                 <label>Task:</label>
                 <input ref="newTask" type="text" placeholder="New Task"/>
-              </div>
-              <div>
+
+
                 <label>Task Location:</label>
                 <input id="searchTextField" ref="newLocation" type="text" placeholder="Task Location"/>
-              </div>
-              <div>
+
+
                 <input type="submit" value="Enter New Task"/>
               </div>
             </form>
