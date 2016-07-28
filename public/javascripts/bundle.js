@@ -21993,7 +21993,7 @@
 	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
 	            defaultZoom: 10 },
 	          this.props.coordinates.map(function (coordinate, i) {
-	            return _react2.default.createElement(_marker2.default, _extends({ key: i, className: 'marker' }, coordinate, { text: 'W' }));
+	            return _react2.default.createElement(_marker2.default, _extends({ key: i, className: 'marker' }, coordinate, { text: '' }));
 	          })
 	        )
 	      );
@@ -24821,7 +24821,7 @@
 /* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -24851,12 +24851,12 @@
 	  }
 	
 	  _createClass(Marker, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
-	        this.props.text
+	        _react2.default.createElement("i", { className: "fa fa-map-marker fa-3x", "aria-hidden": "true" })
 	      );
 	    }
 	  }]);

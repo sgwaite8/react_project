@@ -12,7 +12,7 @@ class TaskMap extends React.Component {
         <GoogleMap
           defaultCenter={{lat: 30.2672, lng: -97.7431}}
           defaultZoom={10}>
-          {this.props.coordinates.map((coordinate, i) => { return (<Marker key={i} className="marker" {...coordinate} text={'W'}/>); }) }
+          {this.props.coordinates.map((coordinate, i) => { return (<Marker key={i} className="marker" {...coordinate} text={''} />); }) }
         </GoogleMap>
       </div>
     );
