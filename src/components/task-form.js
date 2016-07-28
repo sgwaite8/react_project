@@ -1,30 +1,32 @@
 import React from 'react';
+import TaskMap from './task-map';
 
 class TaskForm extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      coordinates: []
+    }
   }
 
   componentDidMount() {
+    this._getLatLng();
+  }
+
+  _getLatLng() {
     var input = document.getElementById('searchTextField');
     var options = {componentRestrictions: {country: 'us'}};
     var autocomplete = new google.maps.places.Autocomplete(input, options);
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
       var thisplace = autocomplete.getPlace();
-      console.log(thisplace);
-      debugger
-    });
+      let coords = {
+        lat: thisplace.geometry.location.lat(),
+        lng: thisplace.geometry.location.lng()
+      }
+      this.setState({ coordinates: this.state.coordinates.concat(coords) })
+    }.bind(this));
   }
-
-  // _handleAutocomplete() {
-  //   var input = document.getElementById('searchTextField');
-  //   var autocomplete = new google.maps.places.Autocomplete(input);
-  //   autocomplete.bindTo('bounds', map);
-  //   console.log(autocomplete);
-  // }
-  // google.maps.event.addDomListener(window, 'load', initialize);
-
 
   _handleSubmit(event){
     event.preventDefault();
@@ -76,6 +78,7 @@ class TaskForm extends React.Component {
             </form>
           </div>
         </div>
+        <TaskMap coordinates={this.state.coordinates} />
       </div>
     );
   }

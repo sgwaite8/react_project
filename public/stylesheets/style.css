@@ -1,6 +1,11 @@
+/*font-family: 'PT Serif', serif;*/
+/*font-family: 'Raleway', sans-serif;*/
+/*colors: GRAIN: #D7CEC7, BLACKBOARD: #565656, OXBLOOD: #76323F, TAN: #C09F80; */
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /*background-color: #D7CEC7;*/
 }
 
 a {
@@ -11,6 +16,27 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+h1 {
+  font-family: 'PT Serif', serif;
+  font-weight: bold;
+  font-size: 100px;
+}
+
+h2{
+  font-family: 'Raleway', sans-serif;
+  font-size: 73px;
+  margin-top: -27px;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #76323F;
+}
+
+.panel {
+  /*background-color: #D7CEC7;*/
 }
 
 

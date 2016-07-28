@@ -21120,10 +21120,6 @@
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
-	var _taskMap = __webpack_require__(177);
-	
-	var _taskMap2 = _interopRequireDefault(_taskMap);
-	
 	var _firebase = __webpack_require__(201);
 	
 	var _firebase2 = _interopRequireDefault(_firebase);
@@ -21191,8 +21187,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
-	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks }),
-	        _react2.default.createElement(_taskMap2.default, null)
+	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks })
 	      );
 	    }
 	  }]);
@@ -21657,6 +21652,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _taskMap = __webpack_require__(177);
+	
+	var _taskMap2 = _interopRequireDefault(_taskMap);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21671,31 +21670,34 @@
 	  function TaskForm(props) {
 	    _classCallCheck(this, TaskForm);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskForm).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TaskForm).call(this, props));
+	
+	    _this.state = {
+	      coordinates: []
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(TaskForm, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      this._getLatLng();
+	    }
+	  }, {
+	    key: '_getLatLng',
+	    value: function _getLatLng() {
 	      var input = document.getElementById('searchTextField');
 	      var options = { componentRestrictions: { country: 'us' } };
 	      var autocomplete = new google.maps.places.Autocomplete(input, options);
 	      google.maps.event.addListener(autocomplete, 'place_changed', function () {
 	        var thisplace = autocomplete.getPlace();
-	        console.log(thisplace);
-	        debugger;
-	      });
+	        var coords = {
+	          lat: thisplace.geometry.location.lat(),
+	          lng: thisplace.geometry.location.lng()
+	        };
+	        this.setState({ coordinates: this.state.coordinates.concat(coords) });
+	      }.bind(this));
 	    }
-	
-	    // _handleAutocomplete() {
-	    //   var input = document.getElementById('searchTextField');
-	    //   var autocomplete = new google.maps.places.Autocomplete(input);
-	    //   autocomplete.bindTo('bounds', map);
-	    //   console.log(autocomplete);
-	    // }
-	    // google.maps.event.addDomListener(window, 'load', initialize);
-	
-	
 	  }, {
 	    key: '_handleSubmit',
 	    value: function _handleSubmit(event) {
@@ -21777,7 +21779,8 @@
 	              )
 	            )
 	          )
-	        )
+	        ),
+	        _react2.default.createElement(_taskMap2.default, { coordinates: this.state.coordinates })
 	      );
 	    }
 	  }]);
@@ -21848,7 +21851,7 @@
 	            'div',
 	            { className: 'panel-body' },
 	            this.props.tasks.map(function (task, index) {
-	              return _react2.default.createElement(_task2.default, _extends({ key: index }, task));
+	              return _react2.default.createElement(_task2.default, _extends({ taskId: task.id, key: index }, task));
 	            })
 	          )
 	        )
@@ -21895,25 +21898,37 @@
 	  }
 	
 	  _createClass(Task, [{
+	    key: '_handleClick',
+	    value: function _handleClick() {
+	      var confirmed = confirm("Are you sure?");
+	      if (confirmed) {
+	        $.ajax({
+	          method: 'DELETE',
+	          url: '/' + this.props.taskId,
+	          dataType: 'json'
+	        }).done(function (data) {
+	          this.setState({ display: false });
+	        }.bind(this));
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement('input', { type: 'checkbox', value: '' }),
 	        _react2.default.createElement(
 	          'h3',
 	          null,
-	          ' ',
-	          this.props.message,
-	          ' '
+	          this.props.message
 	        ),
 	        _react2.default.createElement(
 	          'p',
 	          null,
-	          ' ',
-	          this.props.location,
-	          ' '
-	        )
+	          this.props.location
+	        ),
+	        _react2.default.createElement('i', { onClick: this._handleClick.bind(this), className: 'fa fa-trash', 'aria-hidden': 'true' })
 	      );
 	    }
 	  }]);
@@ -21933,6 +21948,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
@@ -21946,10 +21963,6 @@
 	var _marker = __webpack_require__(200);
 	
 	var _marker2 = _interopRequireDefault(_marker);
-	
-	var _taskForm = __webpack_require__(174);
-	
-	var _taskForm2 = _interopRequireDefault(_taskForm);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21979,7 +21992,9 @@
 	          {
 	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
 	            defaultZoom: 10 },
-	          _react2.default.createElement(_marker2.default, { className: 'marker', lat: 30.2672, lng: -97.7431, text: 'W' })
+	          this.props.coordinates.map(function (coordinate, i) {
+	            return _react2.default.createElement(_marker2.default, _extends({ key: i, className: 'marker' }, coordinate, { text: 'W' }));
+	          })
 	        )
 	      );
 	    }
