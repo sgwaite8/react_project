@@ -21705,7 +21705,7 @@
 	      this.props.addTask(newTask, newLocation);
 	      // this.props.addLocation(newLocation);
 	      this.refs.newTask.value = '';
-	      // this.refs.newLocation.value = '';
+	      this.refs.newLocation.value = '';
 	    }
 	
 	    // _handleSubmit(evt) {
