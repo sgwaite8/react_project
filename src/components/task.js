@@ -1,4 +1,5 @@
 import React from 'react';
+import Firebase from 'firebase';
 
 class Task extends React.Component {
 
@@ -8,14 +9,8 @@ class Task extends React.Component {
   _handleClick(){
     var confirmed = confirm("Are you sure?");
     if (confirmed){
-      $.ajax({
-      method: 'DELETE',
-      url: '/' + this.props.taskId,
-      dataType: 'json'
-    })
-      .done(function(data){
-        this.setState({display: false});
-      }.bind(this));
+      let firebaseRef = this.props.firebaseRef.child( this.props.id );
+      firebaseRef.remove();
     }
   }
   render() {
