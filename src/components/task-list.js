@@ -1,5 +1,6 @@
 import React from 'react';
 import Task from './task';
+import _ from 'underscore';
 
 class TaskList extends React.Component {
 
@@ -17,7 +18,7 @@ class TaskList extends React.Component {
           <div className="panel-body">
 
 
-            { this.props.tasks.map((task, index) => <Task taskId={task.id} key={index} {...task} />) }
+            { _.map(this.props.tasks, (task, id) => <Task key={id} {...task} id={id} firebaseRef={this.props.firebaseRef} />) }
 
 
           </div>
