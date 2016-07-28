@@ -78,7 +78,7 @@ class TaskForm extends React.Component {
             </form>
           </div>
         </div>
-        <TaskMap />
+        <TaskMap coordinates={this.state.coordinates} />
       </div>
     );
   }
