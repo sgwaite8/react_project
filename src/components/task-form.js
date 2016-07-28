@@ -30,6 +30,7 @@ class TaskForm extends React.Component {
 
   _handleSubmit(event){
     event.preventDefault();
+
     let newTask = this.refs.newTask.value;
     let newLocation = this.refs.newLocation.value;
     this.props.addTask(newTask, newLocation);

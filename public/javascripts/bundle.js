@@ -21702,6 +21702,7 @@
 	    key: '_handleSubmit',
 	    value: function _handleSubmit(event) {
 	      event.preventDefault();
+	
 	      var newTask = this.refs.newTask.value;
 	      var newLocation = this.refs.newLocation.value;
 	      this.props.addTask(newTask, newLocation);
@@ -21827,21 +21828,34 @@
 	var TaskMap = function (_React$Component) {
 	  _inherits(TaskMap, _React$Component);
 	
-	  function TaskMap() {
+	  function TaskMap(props) {
 	    _classCallCheck(this, TaskMap);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskMap).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TaskMap).call(this, props));
 	  }
 	
 	  _createClass(TaskMap, [{
+	    key: '_onMapLoad',
+	    value: function _onMapLoad(mapsObject) {
+	      this.googleMap = mapsObject.map;
+	      this.directionsService = new mapsObject.maps.DirectionsService();
+	      this.directionsDisplay = new mapsObject.maps.DirectionsRenderer({ map: this.googleMap });
+	      this.stepDisplay = new mapsObject.maps.InfoWindow();
+	    }
+	  }, {
+	    key: '_getDirections',
+	    value: function _getDirections() {}
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'col-md-offset-6', id: 'map' },
+	        _react2.default.createElement('input', { type: 'submit', value: 'Get a Route' }),
 	        _react2.default.createElement(
 	          _googleMapReact2.default,
 	          {
+	            onGoogleApiLoaded: this._onMapLoad.bind(this),
 	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
 	            defaultZoom: 10 },
 	          this.props.coordinates.map(function (coordinate, i) {
