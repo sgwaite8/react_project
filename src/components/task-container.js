@@ -2,7 +2,6 @@ import React from 'react';
 import 'whatwg-fetch';
 import TaskForm from './task-form';
 import TaskList from './task-list';
-import TaskMap from './task-map';
 import Firebase from 'firebase';
 import _ from 'underscore';
 
@@ -48,7 +47,6 @@ class TaskContainer extends React.Component {
         <TaskForm addTask={this._addTask.bind(this)} />
         {/*<TaskForm addTask={this._addTask.bind(this)} addLocation={this._addLocation.bind(this) } />*/}
         <TaskList tasks={this.state.tasks}  />
-        <TaskMap />
       </div>
     );
   }
