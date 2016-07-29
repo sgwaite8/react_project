@@ -62,7 +62,7 @@ class TaskMap extends React.Component {
     }
 
     return (
-      <div class="panel-body">
+      <div className="panel-body">
         <div className="panel panel-default col-md-offset-6" id="map">
           <GoogleMap
             yesIWantToUseGoogleMapApiInternals={true}

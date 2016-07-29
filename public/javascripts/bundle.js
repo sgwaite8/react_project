@@ -22026,7 +22026,7 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { 'class': 'panel-body' },
+	        { className: 'panel-body' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel panel-default col-md-offset-6', id: 'map' },
