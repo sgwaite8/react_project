@@ -132,6 +132,10 @@ h3.task {
   border-color: #C09F80;
 }
 
+.panel {
+  padding: 0px 0px;
+}
+
 .panel-default>.panel-heading {
   background-color: #C09F80;
 }
