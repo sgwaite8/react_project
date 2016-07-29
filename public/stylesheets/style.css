@@ -66,6 +66,17 @@ h3.panel-title {
   text-align: center;
 }
 
+h3.task {
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  font-size: 29px;
+}
+
+p.task {
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+}
+
 .checkbox {
   display: inline-box;
 }
