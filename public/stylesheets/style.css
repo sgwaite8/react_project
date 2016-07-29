@@ -146,7 +146,7 @@ h3.task {
 
 #map {
   height: 500px;
-  width: 49%;
+  width: 55%;
   display: inline-block;
 }
 
@@ -161,4 +161,13 @@ h3.task {
   min-width: 10;
   max-width: 10;
   overflow-y: scroll;
+}*/
+
+/*@media screen only (max-width: 769px) {
+  #map {
+    text-align: center;
+    height: 500px;
+    width: 100%;
+
+  }
 }*/
