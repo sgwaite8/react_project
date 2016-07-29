@@ -3,7 +3,7 @@
 ## The App
 This app allows users to create a to-do list or task list and view the route to get those tasks done. When a user adds a task to their task list, a marker is added to the map. The map then provides the best route based on the markers on the map. When a user removes a task from the list, the marker is removed from the map. 
 
-![Landing Page](LandingPage.jpg)
+![Landing Page](public/images/landingpage2.png)
 
 
 ## Technologies Used
