@@ -154,6 +154,10 @@ h3.task {
   display: inline-block;
 }
 
+.tl-panel {
+  margin-top: 1.82em;
+}
+
 /*.task-list{
   display: inline-block;
   width: 49%;
@@ -167,11 +171,11 @@ h3.task {
   overflow-y: scroll;
 }*/
 
-/*@media screen only (max-width: 769px) {
+/*@media screen only (min-width: 769px) {
   #map {
     text-align: center;
     height: 500px;
-    width: 100%;
+    width: ;
 
   }
 }*/

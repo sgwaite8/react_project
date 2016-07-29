@@ -11,7 +11,7 @@ class TaskList extends React.Component {
   render() {
     return (
       <div className="task-list">
-        <div className="panel panel-default col-md-5">
+        <div className="panel panel-default col-md-5 tl-panel">
           <div className="panel-heading">
             <h3 className="panel-title"><input type="text" placeholder="List Title"/></h3>
           </div>

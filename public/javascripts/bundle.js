@@ -21820,7 +21820,7 @@
 	        { className: 'task-list' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'panel panel-default col-md-5' },
+	          { className: 'panel panel-default col-md-5 tl-panel' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'panel-heading' },
