@@ -16,11 +16,7 @@ class TaskList extends React.Component {
             <h3 className="panel-title"><input type="text" placeholder="Task List Title"/></h3>
           </div>
           <div className="panel-body">
-
-
-            { _.map(this.props.tasks, (task, id) => <Task key={id} {...task} id={id} firebaseRef={this.props.firebaseRef} />) }
-
-
+            { _.map(this.props.tasks, (task, id) => <Task key={id} message={task.message} location={task.location} id={id} firebaseRef={this.props.firebaseRef} />) }
           </div>
         </div>
       </div>

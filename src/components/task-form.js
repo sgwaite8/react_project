@@ -1,12 +1,12 @@
 import React from 'react';
-import TaskMap from './task-map';
+
 
 class TaskForm extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      coordinates: []
+      latLng: null
     }
   }
 
@@ -20,41 +20,31 @@ class TaskForm extends React.Component {
     var autocomplete = new google.maps.places.Autocomplete(input, options);
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
       var thisplace = autocomplete.getPlace();
-      let coords = {
-        lat: thisplace.geometry.location.lat(),
-        lng: thisplace.geometry.location.lng()
-      }
-      this.setState({ coordinates: this.state.coordinates.concat(coords) })
+      let coords = { lat: thisplace.geometry.location.lat(), lng: thisplace.geometry.location.lng() };
+      this.setState({ latLng: coords });
     }.bind(this));
   }
 
   _handleSubmit(event){
     event.preventDefault();
+
     let newTask = this.refs.newTask.value;
     let newLocation = this.refs.newLocation.value;
-    this.props.addTask(newTask, newLocation);
-    // this.props.addLocation(newLocation);
-    this.refs.newTask.value = '';
-    this.refs.newLocation.value = '';
+    let newLatLng = this.state.latLng;
+
+    if (newTask && newLocation) {
+      this.props.addTask(newTask, newLocation, newLatLng);
+      this.setState({
+        latLng: null
+      });
+      this.refs.newTask.value = '';
+      this.refs.newLocation.value = '';
+    }
+    else {
+      alert("You need both a task and a location.")
+    }
   }
 
-  // _handleSubmit(evt) {
-  //   evt.preventDefault();
-
-  //   let newTask = this.refs.newTask.value;
-  //   let newLocation = this.refs.newLocation.value;
-    // $.ajax({
-    //   url: '/',
-    //   method: 'POST',
-    //   data: { text: newTask, location: newLocation },
-    //   dataType: 'json'
-    // })
-    // .done(function(data){
-    //   console.log(data);
-    //   this.props.addTask(data);
-    //   this.refs.newTask.value = '';
-    //   this.refs.newLocation.value = '';
-    // }.bind(this))
   render() {
     return (
       <div>
@@ -73,12 +63,11 @@ class TaskForm extends React.Component {
                 <input id="searchTextField" ref="newLocation" type="text" placeholder="Task Location"/>
 
 
-                <input type="submit" value="Enter New Task"/>
+                <input className="button" type="submit" value="Enter New Task"/>
               </div>
             </form>
           </div>
         </div>
-        <TaskMap coordinates={this.state.coordinates} />
       </div>
     );
   }
