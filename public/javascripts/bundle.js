@@ -24084,7 +24084,7 @@
 	
 	var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
 	
-	var _marker = __webpack_require__(203);
+	var _marker = __webpack_require__(204);
 	
 	var _marker2 = _interopRequireDefault(_marker);
 	
@@ -24229,63 +24229,63 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _shallowEqual = __webpack_require__(133);
+	var _shallowEqual = __webpack_require__(183);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _marker_dispatcher = __webpack_require__(183);
+	var _marker_dispatcher = __webpack_require__(184);
 	
 	var _marker_dispatcher2 = _interopRequireDefault(_marker_dispatcher);
 	
-	var _google_map_map = __webpack_require__(185);
+	var _google_map_map = __webpack_require__(186);
 	
 	var _google_map_map2 = _interopRequireDefault(_google_map_map);
 	
-	var _google_map_markers = __webpack_require__(186);
+	var _google_map_markers = __webpack_require__(187);
 	
 	var _google_map_markers2 = _interopRequireDefault(_google_map_markers);
 	
-	var _google_map_markers_prerender = __webpack_require__(188);
+	var _google_map_markers_prerender = __webpack_require__(189);
 	
 	var _google_map_markers_prerender2 = _interopRequireDefault(_google_map_markers_prerender);
 	
-	var _google_map_loader = __webpack_require__(189);
+	var _google_map_loader = __webpack_require__(190);
 	
 	var _google_map_loader2 = _interopRequireDefault(_google_map_loader);
 	
-	var _detect = __webpack_require__(191);
+	var _detect = __webpack_require__(192);
 	
 	var _detect2 = _interopRequireDefault(_detect);
 	
-	var _geo = __webpack_require__(192);
+	var _geo = __webpack_require__(193);
 	
 	var _geo2 = _interopRequireDefault(_geo);
 	
-	var _array_helper = __webpack_require__(197);
+	var _array_helper = __webpack_require__(198);
 	
 	var _array_helper2 = _interopRequireDefault(_array_helper);
 	
-	var _is_plain_object = __webpack_require__(198);
+	var _is_plain_object = __webpack_require__(199);
 	
 	var _is_plain_object2 = _interopRequireDefault(_is_plain_object);
 	
-	var _pick = __webpack_require__(199);
+	var _pick = __webpack_require__(200);
 	
 	var _pick2 = _interopRequireDefault(_pick);
 	
-	var _raf = __webpack_require__(200);
+	var _raf = __webpack_require__(201);
 	
 	var _raf2 = _interopRequireDefault(_raf);
 	
-	var _log = __webpack_require__(201);
+	var _log = __webpack_require__(202);
 	
 	var _log2 = _interopRequireDefault(_log);
 	
-	var _isNumber = __webpack_require__(202);
+	var _isNumber = __webpack_require__(203);
 	
 	var _isNumber2 = _interopRequireDefault(_isNumber);
 	
-	var _omit = __webpack_require__(187);
+	var _omit = __webpack_require__(188);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
@@ -25167,6 +25167,77 @@
 
 /***/ },
 /* 183 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @typechecks
+	 * 
+	 */
+	
+	/*eslint-disable no-self-compare */
+	
+	'use strict';
+	
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	
+	/**
+	 * inlined Object.is polyfill to avoid requiring consumers ship their own
+	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+	 */
+	function is(x, y) {
+	  // SameValue algorithm
+	  if (x === y) {
+	    // Steps 1-5, 7-10
+	    // Steps 6.b-6.e: +0 != -0
+	    return x !== 0 || 1 / x === 1 / y;
+	  } else {
+	    // Step 6.a: NaN == NaN
+	    return x !== x && y !== y;
+	  }
+	}
+	
+	/**
+	 * Performs equality by iterating through keys on an object and returning false
+	 * when any key has values which are not strictly equal between the arguments.
+	 * Returns true when the values of all keys are strictly equal.
+	 */
+	function shallowEqual(objA, objB) {
+	  if (is(objA, objB)) {
+	    return true;
+	  }
+	
+	  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+	    return false;
+	  }
+	
+	  var keysA = Object.keys(objA);
+	  var keysB = Object.keys(objB);
+	
+	  if (keysA.length !== keysB.length) {
+	    return false;
+	  }
+	
+	  // Test for A's keys different from B.
+	  for (var i = 0; i < keysA.length; i++) {
+	    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+	      return false;
+	    }
+	  }
+	
+	  return true;
+	}
+	
+	module.exports = shallowEqual;
+
+/***/ },
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25177,7 +25248,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventemitter = __webpack_require__(184);
+	var _eventemitter = __webpack_require__(185);
 	
 	var _eventemitter2 = _interopRequireDefault(_eventemitter);
 	
@@ -25230,7 +25301,7 @@
 	exports.default = MarkerDispatcher;
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25525,7 +25596,7 @@
 
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25585,7 +25656,7 @@
 	exports.default = GoogleMapMap;
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25602,11 +25673,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _shallowEqual = __webpack_require__(133);
+	var _shallowEqual = __webpack_require__(183);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _omit = __webpack_require__(187);
+	var _omit = __webpack_require__(188);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
@@ -25920,7 +25991,7 @@
 	exports.default = GoogleMapMarkers;
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -25947,7 +26018,7 @@
 	exports.default = omit;
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25970,7 +26041,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _google_map_markers = __webpack_require__(186);
+	var _google_map_markers = __webpack_require__(187);
 	
 	var _google_map_markers2 = _interopRequireDefault(_google_map_markers);
 	
@@ -25988,7 +26059,7 @@
 	}; // opacity: 0.3
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -26009,7 +26080,7 @@
 	// TODO add libraries language and other map options
 	function googleMapLoader(bootstrapURLKeys) {
 	  if (!$script_) {
-	    $script_ = __webpack_require__(190); // eslint-disable-line
+	    $script_ = __webpack_require__(191); // eslint-disable-line
 	  }
 	
 	  // call from outside google-map-react
@@ -26066,7 +26137,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -26195,7 +26266,7 @@
 
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26244,7 +26315,7 @@
 	}
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26257,15 +26328,15 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _lat_lng = __webpack_require__(193);
+	var _lat_lng = __webpack_require__(194);
 	
 	var _lat_lng2 = _interopRequireDefault(_lat_lng);
 	
-	var _pointGeometry = __webpack_require__(195);
+	var _pointGeometry = __webpack_require__(196);
 	
 	var _pointGeometry2 = _interopRequireDefault(_pointGeometry);
 	
-	var _transform = __webpack_require__(196);
+	var _transform = __webpack_require__(197);
 	
 	var _transform2 = _interopRequireDefault(_transform);
 	
@@ -26400,7 +26471,7 @@
 	exports.default = Geo;
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26411,7 +26482,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _wrap2 = __webpack_require__(194);
+	var _wrap2 = __webpack_require__(195);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -26455,7 +26526,7 @@
 	exports.default = LatLng;
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26470,7 +26541,7 @@
 	}
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26607,7 +26678,7 @@
 
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26618,15 +26689,15 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _lat_lng = __webpack_require__(193);
+	var _lat_lng = __webpack_require__(194);
 	
 	var _lat_lng2 = _interopRequireDefault(_lat_lng);
 	
-	var _pointGeometry = __webpack_require__(195);
+	var _pointGeometry = __webpack_require__(196);
 	
 	var _pointGeometry2 = _interopRequireDefault(_pointGeometry);
 	
-	var _wrap = __webpack_require__(194);
+	var _wrap = __webpack_require__(195);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -26788,7 +26859,7 @@
 	exports.default = Transform;
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26810,7 +26881,7 @@
 	}
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26848,7 +26919,7 @@
 	}
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26869,7 +26940,7 @@
 	}
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26889,7 +26960,7 @@
 	}
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26905,7 +26976,7 @@
 	exports.default = log2;
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26930,7 +27001,7 @@
 	}
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
