@@ -26,7 +26,7 @@ Before we began coding, our group collaborated on the following:
 6. Potential Bonus Features,
 7. A Plan of Action and Goals/Deadlines
 
-
+![Trello](public/images/Trello.png)
 ![Wireframes](public/images/components.jpg)
 
 Next, we took a "divide and conquer" approach with the following steps:
