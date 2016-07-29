@@ -5,7 +5,6 @@ import TaskList from './task-list';
 import TaskMap from './task-map';
 import Firebase from 'firebase';
 import _ from 'underscore';
-// import _ from 'underscore';
 
 class TaskContainer extends React.Component {
 
@@ -47,8 +46,8 @@ class TaskContainer extends React.Component {
     return (
       <div>
         <TaskForm addTask={this._addTask.bind(this)} />
-        <TaskMap tasks={_.values(this.state.tasks)} />
-        <TaskList tasks={this.state.tasks} firebaseRef={this.firebaseRef} />
+          <TaskList tasks={this.state.tasks} firebaseRef={this.firebaseRef} />
+          <TaskMap tasks={_.values(this.state.tasks)} />
       </div>
     );
   }

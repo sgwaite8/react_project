@@ -21140,8 +21140,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	// import _ from 'underscore';
-	
 	var TaskContainer = function (_React$Component) {
 	  _inherits(TaskContainer, _React$Component);
 	
@@ -21193,8 +21191,8 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_taskForm2.default, { addTask: this._addTask.bind(this) }),
-	        _react2.default.createElement(_taskMap2.default, { tasks: _underscore2.default.values(this.state.tasks) }),
-	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks, firebaseRef: this.firebaseRef })
+	        _react2.default.createElement(_taskList2.default, { tasks: this.state.tasks, firebaseRef: this.firebaseRef }),
+	        _react2.default.createElement(_taskMap2.default, { tasks: _underscore2.default.values(this.state.tasks) })
 	      );
 	    }
 	  }]);
@@ -21733,7 +21731,7 @@
 	            _react2.default.createElement(
 	              'h3',
 	              { className: 'panel-title' },
-	              'Input New Task'
+	              'What\'s Next?'
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21750,14 +21748,14 @@
 	                  null,
 	                  'Task:'
 	                ),
-	                _react2.default.createElement('input', { ref: 'newTask', type: 'text', placeholder: 'New Task' }),
+	                _react2.default.createElement('input', { ref: 'newTask', type: 'text', placeholder: 'Task' }),
 	                _react2.default.createElement(
 	                  'label',
 	                  null,
-	                  'Task Location:'
+	                  'Location:'
 	                ),
-	                _react2.default.createElement('input', { id: 'searchTextField', ref: 'newLocation', type: 'text', placeholder: 'Task Location' }),
-	                _react2.default.createElement('input', { className: 'button', type: 'submit', value: 'Enter New Task' })
+	                _react2.default.createElement('input', { id: 'searchTextField', ref: 'newLocation', type: 'text', placeholder: 'Location' }),
+	                _react2.default.createElement('input', { className: 'button', type: 'submit', value: 'Add to List' })
 	              )
 	            )
 	          )
@@ -21829,7 +21827,7 @@
 	            _react2.default.createElement(
 	              'h3',
 	              { className: 'panel-title' },
-	              _react2.default.createElement('input', { type: 'text', placeholder: 'Task List Title' })
+	              _react2.default.createElement('input', { type: 'text', placeholder: 'List Title' })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -22028,12 +22026,16 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'col-md-offset-6', id: 'map' },
-	        _react2.default.createElement(_googleMapReact2.default, {
-	          yesIWantToUseGoogleMapApiInternals: true,
-	          onGoogleApiLoaded: this._onMapLoad.bind(this),
-	          defaultCenter: { lat: 30.2672, lng: -97.7431 },
-	          defaultZoom: 10 })
+	        { 'class': 'panel-body' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel panel-default col-md-offset-6', id: 'map' },
+	          _react2.default.createElement(_googleMapReact2.default, {
+	            yesIWantToUseGoogleMapApiInternals: true,
+	            onGoogleApiLoaded: this._onMapLoad.bind(this),
+	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
+	            defaultZoom: 10 })
+	        )
 	      );
 	    }
 	  }]);

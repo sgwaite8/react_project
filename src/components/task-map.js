@@ -62,13 +62,15 @@ class TaskMap extends React.Component {
     }
 
     return (
-      <div className="col-md-offset-6" id="map">
-        <GoogleMap
-          yesIWantToUseGoogleMapApiInternals={true}
-          onGoogleApiLoaded={this._onMapLoad.bind(this)}
-          defaultCenter={{lat: 30.2672, lng: -97.7431}}
-          defaultZoom={10}>
-        </GoogleMap>
+      <div class="panel-body">
+        <div className="panel panel-default col-md-offset-6" id="map">
+          <GoogleMap
+            yesIWantToUseGoogleMapApiInternals={true}
+            onGoogleApiLoaded={this._onMapLoad.bind(this)}
+            defaultCenter={{lat: 30.2672, lng: -97.7431}}
+            defaultZoom={10}>
+          </GoogleMap>
+        </div>
       </div>
     );
   }
