@@ -21817,7 +21817,11 @@
 	
 	      return _react2.default.createElement(
 	        'div',
+<<<<<<< HEAD
 	        { className: 'task-list' },
+=======
+	        null,
+>>>>>>> christian
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel panel-default col-md-5' },
@@ -21827,7 +21831,11 @@
 	            _react2.default.createElement(
 	              'h3',
 	              { className: 'panel-title' },
+<<<<<<< HEAD
 	              _react2.default.createElement('input', { type: 'text', placeholder: 'List Title' })
+=======
+	              _react2.default.createElement('input', { type: 'text', placeholder: 'Task List Title' })
+>>>>>>> christian
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21877,6 +21885,7 @@
 	
 	var Task = function (_React$Component) {
 	  _inherits(Task, _React$Component);
+<<<<<<< HEAD
 	
 	  function Task(props) {
 	    _classCallCheck(this, Task);
@@ -21916,6 +21925,46 @@
 	    }
 	  }]);
 	
+=======
+	
+	  function Task(props) {
+	    _classCallCheck(this, Task);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Task).call(this, props));
+	  }
+	
+	  _createClass(Task, [{
+	    key: '_handleClick',
+	    value: function _handleClick() {
+	      var confirmed = confirm("Are you sure?");
+	      if (confirmed) {
+	        var firebaseRef = this.props.firebaseRef.child(this.props.id);
+	        firebaseRef.remove();
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('input', { type: 'checkbox', value: '' }),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          this.props.message
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.location
+	        ),
+	        _react2.default.createElement('i', { onClick: this._handleClick.bind(this), className: 'fa fa-trash', 'aria-hidden': 'true' })
+	      );
+	    }
+	  }]);
+	
+>>>>>>> christian
 	  return Task;
 	}(_react2.default.Component);
 	
@@ -24169,6 +24218,7 @@
 	
 	      return _react2.default.createElement(
 	        'div',
+<<<<<<< HEAD
 	        { className: 'panel-body' },
 	        _react2.default.createElement(
 	          'div',
@@ -24179,6 +24229,14 @@
 	            defaultCenter: { lat: 30.2672, lng: -97.7431 },
 	            defaultZoom: 10 })
 	        )
+=======
+	        { className: 'col-md-offset-6', id: 'map' },
+	        _react2.default.createElement(_googleMapReact2.default, {
+	          yesIWantToUseGoogleMapApiInternals: true,
+	          onGoogleApiLoaded: this._onMapLoad.bind(this),
+	          defaultCenter: { lat: 30.2672, lng: -97.7431 },
+	          defaultZoom: 10 })
+>>>>>>> christian
 	      );
 	    }
 	  }]);
