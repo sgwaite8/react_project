@@ -130,6 +130,7 @@ h3.task {
 .panel-default {
   background-color: #D7CEC7;
   margin: 10px;
+  border-color: #C09F80;
 }
 
 .panel-default>.panel-heading {
@@ -146,7 +147,7 @@ h3.task {
 
 #map {
   height: 500px;
-  width: 55%;
+  width: 54%;
   display: inline-block;
 }
 
