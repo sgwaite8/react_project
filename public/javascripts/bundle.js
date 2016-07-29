@@ -220,7 +220,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = cachedSetTimeout.call(null, cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 	
 	    var len = queue.length;
@@ -237,7 +237,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    cachedClearTimeout.call(null, timeout);
+	    cachedClearTimeout(timeout);
 	}
 	
 	process.nextTick = function (fun) {
@@ -249,7 +249,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout.call(null, drainQueue, 0);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 	
@@ -21817,8 +21817,8 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-<<<<<<< HEAD
 	        { className: 'task-list' },
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 	        { className: 'task-list' },
@@ -21826,6 +21826,8 @@
 	        null,
 >>>>>>> christian
 >>>>>>> c23e57b246a15f5b52af2845b397902e2b263b3c
+=======
+>>>>>>> a6eeb5a0d9d9796a1408811a759de667428a91cc
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'panel panel-default col-md-5' },
@@ -21835,8 +21837,8 @@
 	            _react2.default.createElement(
 	              'h3',
 	              { className: 'panel-title' },
-<<<<<<< HEAD
 	              _react2.default.createElement('input', { type: 'text', placeholder: 'List Title' })
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 	              _react2.default.createElement('input', { type: 'text', placeholder: 'List Title' })
@@ -21844,6 +21846,8 @@
 	              _react2.default.createElement('input', { type: 'text', placeholder: 'Task List Title' })
 >>>>>>> christian
 >>>>>>> c23e57b246a15f5b52af2845b397902e2b263b3c
+=======
+>>>>>>> a6eeb5a0d9d9796a1408811a759de667428a91cc
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21894,8 +21898,11 @@
 	var Task = function (_React$Component) {
 	  _inherits(Task, _React$Component);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> a6eeb5a0d9d9796a1408811a759de667428a91cc
 	
 	  function Task(props) {
 	    _classCallCheck(this, Task);
@@ -21935,6 +21942,7 @@
 	    }
 	  }]);
 	
+<<<<<<< HEAD
 =======
 >>>>>>> c23e57b246a15f5b52af2845b397902e2b263b3c
 	
@@ -21995,6 +22003,8 @@
 =======
 >>>>>>> christian
 >>>>>>> c23e57b246a15f5b52af2845b397902e2b263b3c
+=======
+>>>>>>> a6eeb5a0d9d9796a1408811a759de667428a91cc
 	  return Task;
 	}(_react2.default.Component);
 	
@@ -24253,9 +24263,12 @@
 	      return _react2.default.createElement(
 	        'div',
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> c23e57b246a15f5b52af2845b397902e2b263b3c
+=======
+>>>>>>> a6eeb5a0d9d9796a1408811a759de667428a91cc
 	        { className: 'panel-body' },
 	        _react2.default.createElement(
 	          'div',
@@ -24267,6 +24280,7 @@
 	            defaultZoom: 10 })
 	        )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 	        { className: 'col-md-offset-6', id: 'map' },
@@ -24277,6 +24291,8 @@
 	          defaultZoom: 10 })
 >>>>>>> christian
 >>>>>>> c23e57b246a15f5b52af2845b397902e2b263b3c
+=======
+>>>>>>> a6eeb5a0d9d9796a1408811a759de667428a91cc
 	      );
 	    }
 	  }]);
